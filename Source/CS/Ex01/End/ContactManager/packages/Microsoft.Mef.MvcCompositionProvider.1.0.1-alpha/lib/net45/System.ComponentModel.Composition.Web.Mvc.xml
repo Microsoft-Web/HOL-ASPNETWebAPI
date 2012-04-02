@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.ComponentModel.Composition.Web.Mvc</name>
+    </assembly>
+    <members>
+        <member name="T:System.ComponentModel.Composition.Web.Mvc.CompositionProvider">
+            <summary>
+            Provides composition services to ASP.NET MVC by integrating DependencyResolver with
+            the Managed Extensibility Framework (MEF). This class is self-configuring and will be
+            enabled by simply being present in the application's Bin directory. Most applications
+            should not need to access this class.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.CompositionProvider.SetConfiguration(System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration)">
+            <summary>
+            Used to override the default conventions for controller/part dependency injection.
+            Cannot be used in conjunction with any other methods on this type. Most applications
+            should not use this method.
+            </summary>
+            <param name="configuration">A configuration containing the controller types and other parts that
+            should be used by the composition provider.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.CompositionProvider.AddAssemblies(System.Reflection.Assembly[])">
+            <summary>
+            Adds assemblies containing MEF parts to the composition provider.
+            Part types should be in namespaces that include a ".Parts" element in
+            their name in order to be discovered and used.
+            </summary>
+            <param name="assemblies">Assemblies containing parts to add.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.CompositionProvider.AddAssemblies(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Adds assemblies containing MEF parts to the composition provider.
+            Part types should be in namespaces that include a ".Parts" element in
+            their name in order to be discovered and used.
+            </summary>
+            <param name="assemblies">Assemblies containing parts to add.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.CompositionProvider.AddAssembly(System.Reflection.Assembly)">
+            <summary>
+            Adds an assembly containing MEF parts to the composition provider.
+            Part types should be in namespaces that include a ".Parts" element in
+            their name in order to be discovered and used.
+            </summary>
+            <param name="assembly">An assembly containing parts to add.</param>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Web.Mvc.ExportModelBinderAttribute">
+            <summary>
+            Marks a type as being a model binder for a specified model type. The type decorated with
+            this attribute must implement the <see cref="T:System.Web.Mvc.IModelBinder"/> interface.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.ExportModelBinderAttribute.#ctor(System.Type)">
+            <summary>
+            Construct an instance of the <see cref="T:System.ComponentModel.Composition.Web.Mvc.ExportModelBinderAttribute"/>.
+            </summary>
+            <param name="modelType">The model type bound by the model binder.</param>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Web.Mvc.Internal.RequestScopeFactory">
+            <summary>
+            Composition root for the MVC integration, do not call directly.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.Internal.RequestScopeFactory.#ctor(System.ComponentModel.Composition.ExportFactory{System.ComponentModel.Composition.IExportProvider})">
+            <summary>
+            For internal use.
+            </summary>
+            <param name="requestExportProviderFactory">For internal use.</param>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Web.Mvc.Boundaries">
+            <summary>
+            Well-known sharing boundary names. The composition provider uses
+            all of these when handling a web request.
+            </summary>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Web.Mvc.Boundaries.HttpRequest">
+            <summary>
+            The boundary within which a current HTTP request is accessible.
+            </summary>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Web.Mvc.Boundaries.DataConsistency">
+            <summary>
+            The boundary within which a consistent view of persistent data is available.
+            </summary>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Web.Mvc.Boundaries.UserIdentity">
+            <summary>
+            The boundary within which a single user can be identified.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Web.Mvc.MvcContainerConfiguration">
+            <summary>
+            A <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration"/> that loads parts in the currently-executing ASP.NET MVC web application.
+            Parts are detected by namespace - classes in a ".Parts" namespace will be considered to be parts. These classes,
+            and any interfaces they implement, will be exported and shared on a per-HTTP-request basis. When resolving
+            dependencies, the longest public constructor on a part type will be used. The <see cref="T:System.ComponentModel.Composition.ImportAttribute"/>,
+            <see cref="T:System.ComponentModel.Composition.ExportAttribute"/> and associated MEF attributes can be applied to modify composition structure.
+            </summary>
+            <remarks>
+            This implementation emulates CompositionContainer and the composition-container based MVC
+            integration for all types under the Parts namespace, for controllers, and for model binders. This will
+            aid migration from one composition engine to the other, but this decision should be revisited if it
+            causes confusion.
+            </remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.MvcContainerConfiguration.#ctor(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Construct an <see cref="T:System.ComponentModel.Composition.Web.Mvc.MvcContainerConfiguration"/> using parts in the specified assemblies.
+            </summary>
+            <param name="assemblies">Assemblies in which to search for parts.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.MvcContainerConfiguration.#ctor">
+            <summary>
+            Construct an <see cref="T:System.ComponentModel.Composition.Web.Mvc.MvcContainerConfiguration"/> using parts in the main application assembly.
+            In some applications this may not be the expected assembly - in those cases specify the
+            assemblies explicitly using the other constructor.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Web.Mvc.RequestCompositionScopeModule">
+            <summary>
+            Provides lifetime management for the <see cref="T:System.ComponentModel.Composition.Web.Mvc.CompositionProvider"/> type.
+            This module is automatically injected into the ASP.NET request processing
+            pipeline at startup and should not be called by user code.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.RequestCompositionScopeModule.Register">
+            <summary>
+            Register the module. This method is automatically called
+            at startup and should not be called by user code.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.RequestCompositionScopeModule.Dispose">
+            <summary>
+            Release resources used by the module.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Web.Mvc.RequestCompositionScopeModule.Init(System.Web.HttpApplication)">
+            <summary>
+            Initialize the module.
+            </summary>
+            <param name="context">Application in which the module is running.</param>
+        </member>
+    </members>
+</doc>

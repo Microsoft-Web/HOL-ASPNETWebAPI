@@ -1,0 +1,985 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.ComponentModel.Composition.Lightweight</name>
+    </assembly>
+    <members>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.PropertyImportSite">
+            <summary>
+            Represents a part property that is configured as an import.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.ImportMetadataConstraintAttribute">
+            <summary>
+            When applied on an import, requires certain metadata values on the exporter.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.ImportMetadataConstraintAttribute.#ctor(System.String,System.Object)">
+            <summary>
+            Require a specific metadata value on the exporter.
+            </summary>
+            <param name="constraintName">The metadata key to match.</param>
+            <param name="value">The value to match.</param>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.ImportMetadataConstraintAttribute.ConstraintName">
+            <summary>
+            The metadata key to match.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.ImportMetadataConstraintAttribute.Value">
+            <summary>
+            The value to match.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.OrderByMetadataAttribute">
+            <summary>
+            Used in conjunction with an ImportMany import,
+            specifies the metadata item associated with each value that will be used to
+            order the result.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.OrderByMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.OrderByMetadataAttribute"/> for the specified metadata name.
+            </summary>
+            <param name="orderMetadataName">The name of the metadata item to use to order the collection.</param>
+        </member>
+        <member name="P:System.ComponentModel.Composition.OrderByMetadataAttribute.OrderMetadataName">
+            <summary>
+            The name of the metadata item to use as the key of the dictionary.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase">
+            <summary>
+            Default implementation for <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <remarks>
+            Currently there is an issue with this class/IExportProvider; these
+            types together pull in quite a bit of hosting code and policy (Contract,
+            ContracHelpers, MetadataConstrainedDiscriminator, ...) that, depending on
+            assembly factoring, may be undesirable in the programming-model assemblies.
+            </remarks>
+        </member>
+        <member name="T:System.ComponentModel.Composition.IExportProvider">
+            <summary>
+            Implemented by types that can provide exports from the composition graph.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.TryGetExport(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Object@)">
+            <summary>
+            Retrieve the single <paramref name="contract"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="contract">The contract to retrieve.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.GetExport``1(System.Object)">
+            <summary>
+            Retrieve the single <typeparamref name="TExport"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <typeparam name="TExport">The type of the export to retrieve.</typeparam>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.TryGetExport(System.Type,System.Object,System.Object@)">
+            <summary>
+            Retrieve the single <paramref name="exportType"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="exportType">The type of the export to retrieve.</param>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.TryGetExport``1(System.Object,``0@)">
+            <summary>
+            Retrieve the single <typeparamref name="TExport"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <typeparam name="TExport">The type of the export to retrieve.</typeparam>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.GetExport(System.Type,System.Object)">
+            <summary>
+            Retrieve the single <paramref name="exportType"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="exportType">The type of the export to retrieve.</param>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.GetExport(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract)">
+            <summary>
+            Retrieve the single <paramref name="contract"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="contract">The contract of the export to retrieve.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.GetExports(System.Type,System.Object)">
+            <summary>
+            Retrieve the single <paramref name="exportType"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="exportType">The type of the export to retrieve.</param>
+            <param name="discriminator">The discriminator to apply when selecting the export.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.GetExports``1(System.Object)">
+            <summary>
+            Retrieve the single <typeparamref name="TExport"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <typeparam name="TExport">The export type to retrieve.</typeparam>
+            <returns>An instance of the export.</returns>
+            <param name="discriminator">The discriminator to apply when selecting the export.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.IExportProvider.SatisfyImports(System.Object,System.Reflection.ReflectionContext)">
+            <summary>
+            Set public properties decorated with the <see cref="T:System.ComponentModel.Composition.ImportAttribute"/>.
+            </summary>
+            <remarks>Uses reflection, is slow - caching would help here.</remarks>
+            <param name="conventions">Conventions to apply when satisfying loose imports; or null.</param>
+            <param name="objectWithLooseImports">An object with decorated with import attributes.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.TryGetExport(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Object@)">
+            <summary>
+            Retrieve the single <paramref name="contract"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="contract">The contract to retrieve.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.GetExport``1(System.Object)">
+            <summary>
+            Retrieve the single <typeparamref name="TExport"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <typeparam name="TExport">The type of the export to retrieve.</typeparam>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.TryGetExport(System.Type,System.Object,System.Object@)">
+            <summary>
+            Retrieve the single <paramref name="exportType"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="exportType">The type of the export to retrieve.</param>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.TryGetExport``1(System.Object,``0@)">
+            <summary>
+            Retrieve the single <typeparamref name="TExport"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <typeparam name="TExport">The type of the export to retrieve.</typeparam>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.GetExport(System.Type,System.Object)">
+            <summary>
+            Retrieve the single <paramref name="exportType"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="exportType">The type of the export to retrieve.</param>
+            <param name="discriminator">Optionally, a discriminator that constrains the selection of the export.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.GetExport(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract)">
+            <summary>
+            Retrieve the single <paramref name="contract"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="contract">The contract of the export to retrieve.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.GetExports(System.Type,System.Object)">
+            <summary>
+            Retrieve the single <paramref name="exportType"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="exportType">The type of the export to retrieve.</param>
+            <param name="discriminator">The discriminator to apply when selecting the export.</param>
+            <returns>An instance of the export.</returns>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.GetExports``1(System.Object)">
+            <summary>
+            Retrieve the single <typeparamref name="TExport"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <typeparam name="TExport">The export type to retrieve.</typeparam>
+            <returns>An instance of the export.</returns>
+            <param name="discriminator">The discriminator to apply when selecting the export.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportProviderBase.SatisfyImports(System.Object,System.Reflection.ReflectionContext)">
+            <summary>
+            Set public properties decorated with the <see cref="T:System.ComponentModel.Composition.ImportAttribute"/>.
+            </summary>
+            <remarks>Uses reflection, is slow - caching would help here.</remarks>
+            <param name="conventions">Conventions to apply when satisfying loose imports; or null.</param>
+            <param name="objectWithLooseImports">An object with decorated with import attributes.</param>
+        </member>
+        <member name="T:System.ComponentModel.Composition.KeyByMetadataAttribute">
+            <summary>
+            Used in conjunction with an import of type <see cref="T:System.Collections.Generic.IDictionary`2"/>,
+            specifies the metadata item associated with each value that will be used as the
+            key within the dictionary.
+            </summary>
+            <example>
+            The exporters provide a metadata item, here "HandledState":
+            <code>
+            [Export(typeof(ModemStateImplementation)),
+             ExportMetadata("HandledState", ModemState.On)]
+            public class OnState : ModemStateImplementation
+            {
+            </code>
+            The importer requests that its imports are keyed according to the same metadata item.
+            <code>
+            [ImportingConstructor]
+            public Modem(
+                [KeyByMetadata("HandledState")]
+                IDictionary&lt;ModemState, Lazy&lt;ModemStateImplementation&gt;&gt; states)
+            {
+            </code>
+            </example>
+        </member>
+        <member name="M:System.ComponentModel.Composition.KeyByMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.KeyByMetadataAttribute"/> for the specified metadata name.
+            </summary>
+            <param name="keyMetadataName">The name of the metadata item to use as the key of the dictionary.</param>
+        </member>
+        <member name="P:System.ComponentModel.Composition.KeyByMetadataAttribute.KeyMetadataName">
+            <summary>
+            The name of the metadata item to use as the key of the dictionary.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration">
+            <summary>
+            Configures and constructs a lightweight container.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.CreateContainer">
+            <summary>
+            Create the container. The value returned from this method provides
+            the exports in the container, as well as a means to dispose the container.
+            </summary>
+            <returns>The container wrapped in an <see cref="T:System.ComponentModel.Composition.ExportLifetimeContext`1"/>.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithProvider(System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider)">
+            <summary>
+            Add an export descriptor provider to the container.
+            </summary>
+            <param name="exportDescriptorProvider">An export descriptor provider.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithDefaultConventions(System.Reflection.ReflectionContext)">
+            <summary>
+            Add conventions defined using a <see cref="T:System.Reflection.ReflectionContext"/> to the container.
+            These will be used as the default conventions; types and assemblies added with a
+            specific convention will use their own.
+            </summary>
+            <param name="reflectionContext"></param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithPart(System.Type,System.Reflection.ReflectionContext)">
+            <summary>
+            Add a part type to the container. If the part type does not have any exports it
+            will be ignored.
+            </summary>
+            <param name="partType">The part type.</param>
+            <param name="conventions">Conventions represented by a <see cref="T:System.Reflection.ReflectionContext"/>, or null.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithPart``1(System.Reflection.ReflectionContext)">
+            <summary>
+            Add a part type to the container. If the part type does not have any exports it
+            will be ignored.
+            </summary>
+            <typeparam name="TPart">The part type.</typeparam>
+            <param name="conventions">Conventions represented by a <see cref="T:System.Reflection.ReflectionContext"/>, or null.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithParts(System.Type[])">
+            <summary>
+            Add part types to the container. If a part type does not have any exports it
+            will be ignored.
+            </summary>
+            <param name="partTypes">The part types.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithParts(System.Collections.Generic.IEnumerable{System.Type},System.Reflection.ReflectionContext)">
+            <summary>
+            Add part types to the container. If a part type does not have any exports it
+            will be ignored.
+            </summary>
+            <param name="partTypes">The part types.</param>
+            <param name="conventions">Conventions represented by a <see cref="T:System.Reflection.ReflectionContext"/>, or null.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithAssembly(System.Reflection.Assembly,System.Reflection.ReflectionContext)">
+            <summary>
+            Add part types from an assembly to the container. If a part type does not have any exports it
+            will be ignored.
+            </summary>
+            <param name="assembly">The assembly from which to add part types.</param>
+            <param name="conventions">Conventions represented by a <see cref="T:System.Reflection.ReflectionContext"/>, or null.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.ContainerConfiguration.WithAssemblies(System.Collections.Generic.IEnumerable{System.Reflection.Assembly},System.Reflection.ReflectionContext)">
+            <summary>
+            Add part types from a list of assemblies to the container. If a part type does not have any exports it
+            will be ignored.
+            </summary>
+            <param name="assemblies">Assemblies containing part types.</param>
+            <param name="conventions">Conventions represented by a <see cref="T:System.Reflection.ReflectionContext"/>, or null.</param>
+            <returns>A configuration object allowing configuration to continue.</returns>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositionOperation">
+            <summary>
+            Represents a single logical graph-building operation.
+            </summary>
+            <remarks>Instances of this class are not safe for access by multiple threads.</remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositionOperation.Run(System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext,System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositeActivator)">
+            <summary>
+            Execute a new composition operation starting within the specified lifetime
+            context, for the specified activator.
+            </summary>
+            <param name="context">Context in which to begin the operation (the operation can flow
+            to the parents of the context if requried).</param>
+            <param name="activator">Activator that will drive the operation.</param>
+            <returns>The composed object graph.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositionOperation.AddNonPrerequisiteAction(System.Action)">
+            <summary>
+            Called during the activation process to specify an action that can run after all
+            prerequesite part dependencies have been satisfied.
+            </summary>
+            <param name="action">Action to run.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositionOperation.AddPostCompositionAction(System.Action)">
+            <summary>
+            Called during the activation process to specify an action that must run only after
+            all composition has completed. See <see cref="T:System.ComponentModel.Composition.IPartImportsSatisfiedNotification"/>.
+            </summary>
+            <param name="action">Action to run.</param>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Constants">
+            <summary>
+            Metadata keys used to tie programming model entities into their back-end hosting implementations.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.IPartMetadataAttribute">
+            <summary>
+            Implemented on attributes that add metadata
+            to parts.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.IPartMetadataAttribute.Metadata">
+            <summary>
+            The metadata applied to the part.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency">
+            <summary>
+            Describes a dependency that a part must have in order to fulfill an
+            <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise"/>. Used by the composition engine during
+            initialization to determine whether the composition can be made, and if not,
+            what error to provide.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.Satisfied(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise,System.Boolean,System.Object)">
+            <summary>
+            Construct a dependency on the specified target.
+            </summary>
+            <param name="target">The export descriptor promise from another part
+            that this part is dependent on.</param>
+            <param name="isPrerequisite">True if the dependency is a prerequisite
+            that must be satisfied before any exports can be retrieved from the dependent
+            part; otherwise, false.</param>
+            <param name="site">A marker used to identify the individual dependency among
+            those on the dependent part.</param>
+            <param name="contract">The contract required by the dependency.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.Missing(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Object)">
+            <summary>
+            Construct a placeholder for a missing dependency. Note that this is different
+            from an optional dependency - a missing dependency is an error.
+            </summary>
+            <param name="site">A marker used to identify the individual dependency among
+            those on the dependent part.</param>
+            <param name="contract">The contract required by the dependency.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.Oversupplied(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise[],System.Object)">
+            <summary>
+            Construct a placeholder for an "exactly one" dependency that cannot be
+            configured because multiple target implementations exist.
+            </summary>
+            <param name="site">A marker used to identify the individual dependency among
+            those on the dependent part.</param>
+            <param name="targets">The targets found when expecting only one.</param>
+            <param name="contract">The contract required by the dependency.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.ToString">
+            <summary>
+            Creates a human-readable explanation of the dependency.
+            </summary>
+            <returns>The dependency represented as a string.</returns>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.Target">
+            <summary>
+            The export descriptor promise from another part
+            that this part is dependent on.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.IsPrerequisite">
+            <summary>
+            True if the dependency is a prerequisite
+            that must be satisfied before any exports can be retrieved from the dependent
+            part; otherwise, false.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.Site">
+            <summary>
+            A marker used to identify the individual dependency among
+            those on the dependent part.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency.Contract">
+            <summary>
+            The contract required by the dependency.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise">
+            <summary>
+            Represents an export descriptor that an available part can provide.
+            </summary>
+            <remarks>This type is central to the cycle-checking, adaptation and 
+            compilation features of the container.</remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.#ctor(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.String,System.Boolean,System.Func{System.Collections.Generic.IEnumerable{System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency}},System.Func{System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency[],System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptor})">
+            <summary>
+            Create a promise for an export descriptor.
+            </summary>
+            <param name="origin">A description of where the export is being provided from (e.g. the part type).
+            Used to provide friendly errors.</param>
+            <param name="isShared">True if the export is shared within some context, otherwise false. Used in cycle
+            checking.</param>
+            <param name="dependencies">A function providing dependencies required in order to fulfill the promise.</param>
+            <param name="fulfillment">A function providing the promise.</param>
+            <param name="contract">The contract fulfilled by this promise.</param>
+            <seealso cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider"/>.
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.GetDescriptor">
+            <summary>
+            Retrieve the promised export descriptor.
+            </summary>
+            <returns>The export descriptor.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.ToString">
+            <summary>
+            Describes the promise.
+            </summary>
+            <returns>A description of the promise.</returns>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.Origin">
+            <summary>
+            A description of where the export is being provided from (e.g. the part type).
+            Used to provide friendly errors.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.IsShared">
+            <summary>
+            True if the export is shared within some context, otherwise false. Used in cycle
+            checking.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.Dependencies">
+            <summary>
+            The dependencies required in order to fulfill the promise.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise.Contract">
+            <summary>
+            The contract fulfilled by this promise.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider">
+            <summary>
+            A contributor to the composition.
+            </summary>
+            <remarks>Instances of this class are not required to be safe for concurrent access by
+            multiple threads.</remarks>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider.NoExportDescriptors">
+            <summary>
+            Constant value provided so that subclasses can avoid creating additional duplicate values.
+            </summary>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider.NoMetadata">
+            <summary>
+            Constant value provided so that subclasses can avoid creating additional duplicate values.
+            </summary>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider.NoDependencies">
+            <summary>
+            Constant value provided so that subclasses can avoid creating additional duplicate values.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider.GetExportDescriptors(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor)">
+            <summary>
+            Promise export descriptors for the specified export key.
+            </summary>
+            <param name="contract">The export key required by another component.</param>
+            <param name="descriptorAccessor">Accesses the other export descriptors present in the composition.</param>
+            <returns>Promises for new export descriptors.</returns>
+            <remarks>
+            A provider will only be queried once for each unique export key.
+            The descriptor accessor can only be queried immediately if the descriptor being promised is an adapter, such as
+            <see cref="T:System.Lazy`1"/>; otherwise, dependencies should only be queried within execution of the function provided
+            to the <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorPromise"/>. The actual descriptors provided should not close over or reference any
+            aspect of the dependency/promise structure, as this should be able to be GC'ed.
+            </remarks>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.PisnFeature">
+            <summary>
+            Modifies activators of parts that implement <see cref="T:System.ComponentModel.Composition.IPartImportsSatisfiedNotification"/> so that
+            their OnImportsSatisfied() method is correctly called.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.ActivationFeature">
+            <summary>
+            Allows modification of the activators generated for typed parts.
+            </summary>
+        </member>
+        <member name="F:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.ActivationFeature.NoDependencies">
+            <summary>
+            A constant shared for subclass use.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.ActivationFeature.RewriteActivator(System.Type,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Collections.Generic.IDictionary{System.String,System.Object},System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency[])">
+            <summary>
+            Participate in the activator creation process.
+            </summary>
+            <param name="partType">The part type being activated.</param>
+            <param name="compositionContextParameter">Expression parameter for the composition context.</param>
+            <param name="operationParameter">Expression parameter for the composition operation.</param>
+            <param name="activatorBody">The activator body so far.</param>
+            <param name="partMetadata">Metadata associated with the part being activated.</param>
+            <param name="dependencies">Dependencies returned by a previous call to <see cref="M:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.ActivationFeature.GetDependencies(System.Type,System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor)"/>.</param>
+            <returns>A new activator body, or the one already provided.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.ActivationFeature.GetDependencies(System.Type,System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor)">
+            <summary>
+            Describe the dependencies required by this activation feature.
+            </summary>
+            <param name="partType">The part type being activated.</param>
+            <param name="definitionAccessor">The definition accessor.</param>
+            <returns>Dependencies.</returns>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException">
+            <summary>
+            The exception type thrown when composition problems occur.
+            Exception should be assumed to be fatal for the entire composition/container unless
+            otherwise documented - no production code should throw this exception.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException.#ctor(System.String)">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Registration.PartBuilderExtensions">
+            <summary>
+            Helper methods for <see cref="T:System.ComponentModel.Composition.Registration.PartBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Registration.PartBuilderExtensions.Shared``1(``0)">
+            <summary>
+            Mark the part as shared.
+            </summary>
+            <typeparam name="T">Part bilder type.</typeparam>
+            <param name="partBuilder">The part builder.</param>
+            <returns>The part builder.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Registration.PartBuilderExtensions.Shared``1(``0,System.String)">
+            <summary>
+            Mark the part as constrained to a sharing boundary.
+            </summary>
+            <param name="boundary">Sharing boundary.</param>
+            <typeparam name="T">Part bilder type.</typeparam>
+            <param name="partBuilder">The part builder.</param>
+            <returns>The part builder.</returns>
+        </member>
+        <member name="T:System.ComponentModel.Composition.SharedAttribute">
+            <summary>
+            Marks a part as being constrainted to sharing within the named boundary.
+            </summary>
+            <example>
+            [Export,
+             Shared("HttpRequest")]
+            public class HttpResponseWriter { }
+            </example>
+            <seealso cref="T:System.ComponentModel.Composition.SharingBoundaryAttribute"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.SharedAttribute.#ctor">
+            <summary>
+            Mark a part as globally shared.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.SharedAttribute.#ctor(System.String)">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.SharedAttribute"/> for the specified
+            boundary name.
+            </summary>
+            <param name="sharingBoundaryName">The boundary outside of which this part is inaccessible.</param>
+        </member>
+        <member name="P:System.ComponentModel.Composition.SharedAttribute.SharingBoundaryName">
+            <summary>
+            The boundary outside of which this part is inaccessible.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.SharingBoundaryAttribute">
+            <summary>
+            Applied to an import for <see cref="T:System.ComponentModel.Composition.ExportFactory`1"/>, this attribute marks the
+            boundary of a sharing scope. The <see cref="T:System.ComponentModel.Composition.ExportLifetimeContext`1"/> instances
+            returned from the factory will be boundaries for sharing of components that are bounded
+            by the listed boundary names.
+            </summary>
+            <example>
+            [Import, SharingBoundary("HttpRequest")]
+            public ExportFactory&lt;HttpRequestHandler&gt; HandlerFactory { get; set; }
+            </example>
+            <seealso cref="T:System.ComponentModel.Composition.SharedAttribute"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.SharingBoundaryAttribute.#ctor(System.String[])">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.SharingBoundaryAttribute"/> for the specified boundary names.
+            </summary>
+            <param name="sharingBoundaryNames">Boundaries implemented by the created <see cref="T:System.ComponentModel.Composition.ExportLifetimeContext`1"/>s.</param>
+        </member>
+        <member name="P:System.ComponentModel.Composition.SharingBoundaryAttribute.SharingBoundaryNames">
+            <summary>
+            Boundaries implemented by the created <see cref="T:System.ComponentModel.Composition.ExportLifetimeContext`1"/>s.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator">
+            <summary>
+            Represents a discriminator that is augmented with one or more export metadata values.
+            </summary>
+            <remarks>This class could probably perform better using a list of ordered key-value pairs
+            for metadata, and could cache hash code values.</remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Object)">
+            <summary>
+            Construct an <see cref="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator"/>.
+            </summary>
+            <param name="innerDiscriminator"></param>
+            <param name="importMetadata"></param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.Unwrap``1(System.Object,System.String,``0@,System.Object@)">
+            <summary>
+            Retrieve a metadata value from the discriminator, returning a new discriminator
+            without that value.
+            </summary>
+            <typeparam name="T">The type of the metadata value to unwrap.</typeparam>
+            <param name="discriminator">The discriminator to unwrap.</param>
+            <param name="importMetadataName">The metadata key to unwrap.</param>
+            <param name="metadataValue">The unwrapped value.</param>
+            <param name="unwrappedDiscriminator">The unwrapped discriminator.</param>
+            <returns>True if the value was present and could be unwapped, otherwise false.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.Equals(System.Object)">
+            <summary>
+            Checks whether two discriminators are equivalent.
+            </summary>
+            <param name="obj">The other discriminator to check.</param>
+            <returns>True if equivalent; otherwise, false.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.GetHashCode">
+            <summary>
+            Gets a hash code for the discriminator.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.ToString">
+            <summary>
+            Gets a string representation of the discriminator.
+            </summary>
+            <returns>A string representing the discriminator.</returns>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.InnerDiscriminator">
+            <summary>
+            The remaining (non-metadata) aspect of the discriminator.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator.Metadata">
+            <summary>
+            The metadata associated with the discriminator.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.DynamicMethodOptimisationFeature">
+            <summary>
+            Invoking a closure within a lambda expression is slower than invoking a regular delegate by
+            quite a bit. This feature rewrites the closure that is formed by the call to GetOrCreate()
+            by transforming the closure into a function of its arguments, then compiling the function
+            and inserting it into the expression as a literal.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext">
+            <summary>
+            Represents a node in the lifetime tree. A <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext"/> is the unit of
+            sharing for shared parts, controls the disposal of bound parts, and can be used to retrieve
+            instances either as part of an existing <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositionOperation"/> or as the basis of a new
+            composition operation. An individual lifetime context can be marked to contain parts that are
+            constrained by particular sharing boundaries.
+            </summary>
+            <remarks>
+            Contains two pieces of _independently protected_ shared state. Shared part instances is
+            lock-free-readable and does not result in issues if added to during disposal. It is protected
+            by being locked itself. Activation logic is unavoidably called under this lock.
+            Bound part instances is always protected, by locking [this], and should never be written to
+            after disposal and so is set to null under a lock in Dispose(). If it were allowed it would result in
+            diposable parts not being released. Dispose methods on parts are called outside the lock.
+            </remarks>
+            <seealso cref="T:System.ComponentModel.Composition.ExportLifetimeContext`1"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.AllocateSharingId">
+            <summary>
+            Generates an identifier that can be used to locate shared part instances.
+            </summary>
+            <returns>A new unique identifier.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.FindContextWithin(System.String)">
+            <summary>
+            Find the broadest lifetime context within all of the specified sharing boundaries.
+            </summary>
+            <param name="sharingBoundary">The sharing boundary to find a lifetime context within.</param>
+            <returns>The broadest lifetime context within all of the specified sharing boundaries.</returns>
+            <remarks>Currently, the root cannot be a boundary.</remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.Dispose">
+            <summary>
+            Release the lifetime context and any disposable part instances
+            that are bound to it.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.AddBoundInstance(System.IDisposable)">
+            <summary>
+            Bind the lifetime of a disposable part to the current
+            lifetime context.
+            </summary>
+            <param name="instance">The disposable part to bind.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.GetOrCreate(System.Int32,System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositionOperation,System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositeActivator)">
+            <summary>
+            Either retrieve an existing part instance with the specified sharing id, or
+            create and share a new part instance using <paramref name="creator"/> within
+            <paramref name="operation"/>.
+            </summary>
+            <param name="sharingId">Sharing id for the part in question.</param>
+            <param name="operation">Operation in which to activate a new part instance if necessary.</param>
+            <param name="creator">Activator that can activate a new part instance if necessary.</param>
+            <returns>The part instance corresponding to <paramref name="sharingId"/> within this lifetime context.</returns>
+            <remarks>This method is lock-free if the part instance already exists. If the part instance must be created,
+            a lock will be taken that will serialize other writes via this method (concurrent reads will continue to
+            be safe and lock-free). It is important that the composition, and thus lock acquisition, is strictly
+            leaf-to-root in the lifetime tree.</remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.TryGetExport(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Object@)">
+            <summary>
+            Retrieve the single <paramref name="contract"/> instance from the
+            <see cref="T:System.ComponentModel.Composition.IExportProvider"/>.
+            </summary>
+            <param name="contract">The contract to retrieve.</param>
+            <returns>An instance of the export.</returns>
+            <param name="export">The export if available, otherwise, null.</param>
+            <exception cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.LightweightCompositionException"/>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.LifetimeContext.ToString">
+            <summary>
+            Describes this lifetime context.
+            </summary>
+            <returns>A string description.</returns>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptor">
+            <summary>
+            Describes an export of a part known to the composition engine. This is the only runtime
+            overhead that is maintained per-part; all other part-specific information must be discarded once
+            its export descriptors have been retrieved.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptor.Create(System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositeActivator,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Construct an <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptor"/>.
+            </summary>
+            <param name="activator">The activator used to retrieve instances of the export.</param>
+            <param name="metadata">The Export Metadata associated with the export.</param>
+            <returns>The export descriptor.</returns>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptor.Activator">
+            <summary>
+            The activator used to retrieve instances of the export.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptor.Metadata">
+            <summary>
+            The Export Metadata associated with the export.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor">
+            <summary>
+            Allows <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.ExportDescriptorProvider"/>s to locate the dependencies they require.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor.GetPromises(System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract)">
+            <summary>
+            Get all definitions for a specified <see cref="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract"/>.
+            </summary>
+            <param name="exportKey">The export key the definitions must supply.</param>
+            <returns>The available promises for that export key.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor.ResolveDependencies(System.Object,System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Boolean)">
+            <summary>
+            Resolve dependencies on all implementations of a contract.
+            </summary>
+            <param name="site">A tag describing the dependency site.</param>
+            <param name="contract">The contract required by the site.</param>
+            <param name="isPrerequisite">True if the dependency must be satisifed before corresponding exports can be retrieved; otherwise, false.</param>
+            <returns>Dependencies for all implementations of the contact.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor.ResolveRequiredDependency(System.Object,System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Boolean)">
+            <summary>
+            Resolve a required dependency on exactly one implemenation of a contract.
+            </summary>
+            <param name="site">A tag describing the dependency site.</param>
+            <param name="contract">The contract required by the site.</param>
+            <param name="isPrerequisite">True if the dependency must be satisifed before corresponding exports can be retrieved; otherwise, false.</param>
+            <returns>The dependency.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.Hosting.Core.DependencyAccessor.TryResolveOptionalDependency(System.Object,System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract,System.Boolean,System.ComponentModel.Composition.Lightweight.Hosting.Core.Dependency@)">
+            <summary>
+            Resolve an optional dependency on exactly one implemenation of a contract.
+            </summary>
+            <param name="site">A tag describing the dependency site.</param>
+            <param name="contract">The contract required by the site.</param>
+            <param name="isPrerequisite">True if the dependency must be satisifed before corresponding exports can be retrieved; otherwise, false.</param>
+            <param name="dependency">The dependency, or null.</param>
+            <returns>True if the dependency could be resolved; otherwise, false.</returns>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.LifetimeFeature">
+            <summary>
+            Modifies the activators of parts so that they a) get associated with the correct
+            scope, and b) obtain their dependencies from the correct scope.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.GlobalInstanceHolder">
+            <summary>
+            Used as a storage location for cached singleton
+            values in <see cref="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.SharedInstanceOptimizationFeature"/>.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Core.CompositeActivator">
+            <summary>
+            The delegate signature that allows instances of parts and exports to be accessed during
+            a composition operation.
+            </summary>
+            <param name="context">The context in which the part or export is being accessed.</param>
+            <param name="operation">The operation within which the activation is occuring.</param>
+            <returns>The activated part or export.</returns>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract">
+            <summary>
+            The link between exports and imports.
+            </summary>
+            <remarks>Extremely performance-sensitive.</remarks>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract.#ctor(System.Type,System.Object)">
+            <summary>
+            Construct a <see cref="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract"/>.
+            </summary>
+            <param name="contractType">The type shared between the exporter and importer.</param>
+            <param name="discriminator">Additional constraining information, or null.</param>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract.Equals(System.Object)">
+            <summary>
+            Determines equality between two contracts.
+            </summary>
+            <param name="obj">The contract to test.</param>
+            <returns>True if the the contracts are equivalent; otherwise, false.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract.GetHashCode">
+            <summary>
+            Gets a hash code for the contract.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract.ToString">
+            <summary>
+            Creates a string representaiton of the contract.
+            </summary>
+            <returns>A string representaiton of the contract.</returns>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract.ContractType">
+            <summary>
+            The type shared between the exporter and importer.
+            </summary>
+        </member>
+        <member name="P:System.ComponentModel.Composition.Lightweight.ProgrammingModel.Contract.Discriminator">
+            <summary>
+            Additional information that must be 100% agreed upon and commonly
+            understood by the exporter and importer. The kinds of possible discriminator
+            values (other than null) may be a string 'contract name', or more complex
+            structures supporting Import Metadata. Extensions are free to create new
+            kinds of discriminator without fear of clashes, however most kinds of
+            discriminators should use the <see cref="T:System.ComponentModel.Composition.Lightweight.ProgrammingModel.MetadataConstrainedDiscriminator"/> protocol.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.PropertyInjectionFeature">
+            <summary>
+            Modifies activators of parts with property imports so that the properties
+            are set appropriately.
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Composition.Lightweight.Hosting.Providers.TypedParts.ActivationFeatures.SharedInstanceOptimizationFeature">
+            <summary>
+            For globally shared (singleton) parts, modifies the activator so that the instance
+            is cached in a field once it is created. The feature implements what is effectively double-checked
+            locking by deferring construction to the appropriate scope object.
+            </summary>
+        </member>
+    </members>
+</doc>
