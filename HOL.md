@@ -100,7 +100,7 @@ This hands-on lab includes the following exercise:
 1. Consume the Web API from an HTML Client
 
  
-Estimated time to complete this lab: 60** minutes**.
+Estimated time to complete this lab: 60 minutes.
 
 >**Note:** When you first start Visual Studio, you must select one of the predefined settings collections. Every predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this lab describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in these procedures that you need to take into account. 
 
@@ -207,7 +207,6 @@ In this task, you will create the controller classes in which API methods will r
 	(Code Snippet - _Web API Lab - Ex01 - Get API Method_)
 
 	````C#
-	C#
 	public class Contact
 	{
 	    public int Id { get; set; }
@@ -224,7 +223,6 @@ In this task, you will create the controller classes in which API methods will r
 	(Code Snippet - _Web API Lab - Ex01 - Returning a list of contacts_)
 
 	````C#
-	C#
 	public Contact[] Get()
 	{
 	    return new Contact[]
@@ -291,7 +289,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 1. Add a using directive to the **ContactRepository.cs** file to include the models namespace.
 
 	````C#
-	C#
 	using ContactManager.Models;
 	````
 
@@ -300,7 +297,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	(Code Snippet - _Web API Lab - Ex01 - Contact Repository_)
 
 	````C#
-	C#
 	public interface IContactRepository
 	{
 	    Contact[] GetAllContacts();
@@ -334,7 +330,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	(Code Snippet - _Web API Lab - Ex01 - Contact Repository Implementation_)
 
 	````C#
-	C#
 	private IContactRepository _contactRepository;
 	 
 	public HomeController(IContactRepository contactRepo)
@@ -362,7 +357,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	(Code Snippet - _Web API Lab - Ex01 - Namespaces for MEF_)
 
 	````C#
-	C#
 	using System.ComponentModel.Composition.Lightweight.Hosting;
 	using System.ComponentModel.Composition.Registration;
 	using System.ComponentModel.Composition.Web.Mvc;
@@ -373,7 +367,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	(Code Snippet - _Web API Lab - Ex01 - Global MEF Wireup_)
 
 	````C#
-	C#
 	protected void Application_Start()
 	{
 	    AreaRegistration.RegisterAllAreas();
@@ -412,7 +405,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 1. Add the following using statement to the namespace declaration section of the file.
 
 	````C#
-	C#
 	using ContactManager.Parts;
 	````
 
