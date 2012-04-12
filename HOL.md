@@ -413,7 +413,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	(Code Snippet - _Web API Lab - Ex01 - Contact Controller_)
 
 	````C#
-	C#
 	public class ContactController : ApiController
 	{
 	    private IContactRepository _contactRepository;
@@ -430,7 +429,6 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	(Code Snippet - _Web API Lab - Ex01 - Returning a list of contacts via the repository_)
 
 	````C#
-	C#
 	public Contact[] Get()
 	{
 	    return _contactRepository.GetAllContacts();
@@ -503,7 +501,6 @@ In this task, you will augment the ContactRepository class of the Web API projec
 1. Add the following constant to the class to represent the name of the web server cache item key name later in this exercise.
 
 	````C#
-	C#
 	const string cacheKey = "ContactStore";
 	````
 
@@ -512,7 +509,6 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	(Code Snippet - _Web API Lab - Ex02 - Contact Repository Constructor_)
 
 	````C#
-	C#
 	public ContactRepository()
 	{
 	    var ctx = HttpContext.Current;
@@ -544,7 +540,6 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	(Code Snippet - _Web API Lab - Ex02 - Get All Contacts_)
 
 	````C#
-	C#
 	public Contact[] GetAllContacts()
 	{
 	    var ctx = HttpContext.Current;
@@ -572,7 +567,6 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	(Code Snippet - _Web API Lab - Ex02 - Adding the SaveContact Method_)
 
 	````C#
-	C#
 	public interface IContactRepository
 	{
 	    Contact[] GetAllContacts();
@@ -585,7 +579,6 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	(Code Snippet - _Web API Lab - Ex02 - Implementing the SaveContact Method_)
 
 	````C#
-	C#
 	public bool SaveContact(Contact contact)
 	{
 	    var ctx = HttpContext.Current;
@@ -708,7 +701,6 @@ In this task, you will continue to modify the Index view of the MVC application.
 	(Code Snippet - _Web API Lab - Ex03 - Post Method_)
 
 	````C#
-	C#
 	public HttpResponseMessage<Contact> Post(Contact contact)
 	{
 	    this._contactRepository.SaveContact(contact);
