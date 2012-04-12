@@ -50,6 +50,7 @@ With code snippets, you have all the code you need at your fingertips. The lab d
 _Using Visual Studio code snippets to insert code into your project_
 
 _**To add a code snippet using the keyboard (C# only)**_
+
 1. Place the cursor where you would like to insert the code.
 
 1. Start typing the snippet name (without spaces or hyphens).
@@ -74,6 +75,7 @@ _Press Tab to select the highlighted snippet_
 _Press Tab again and the snippet will expand_
 
 _**To add a code snippet using the mouse (C# and XML)**_
+
 1. Right-click where you want to insert the code snippet.
 
 1. **Select Insert Snippet** followed by **My Code Snippets**.
@@ -100,7 +102,7 @@ This hands-on lab includes the following exercise:
 1. Consume the Web API from an HTML Client
 
  
-Estimated time to complete this lab: 60 minutes.
+Estimated time to complete this lab: **60 minutes**.
 
 >**Note:** When you first start Visual Studio, you must select one of the predefined settings collections. Every predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this lab describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in these procedures that you need to take into account. 
 
