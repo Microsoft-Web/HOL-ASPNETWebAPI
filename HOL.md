@@ -218,7 +218,7 @@ In this task, you will create the controller classes in which API methods will r
 
 1. In the **ContactController** class, select the word **string** in method definition of the Get method, and type the word **Contact**. Once the word is typed in, an indicator will appear at the beginning of the word _Contact_. Either hold down the Ctrl key and press the period (.) key or click the icon using your mouse to open up the assistance dialog in the code editor, to automatically fill in the **using** directive for the Models namespace.
 
-	![Using Intellisense assistance for namespace declarations](images/Using Intellisense assistance for namespace declarations.png?raw=true)
+	![Using Intellisense assistance for namespace declarations](images/Using-Intellisense-assistance-for-namespace-declarations.png?raw=true)
 
 	_Using Intellisense assistance for namespace declarations_
 
