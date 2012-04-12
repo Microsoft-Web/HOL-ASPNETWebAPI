@@ -619,14 +619,12 @@ In this task, you will modify the default Index view of the web application to s
 1. Add a script reference to load the jQuery JavaScript library at the top of the Index view.
 
 	````HTML
-	HTML
 	<script src="@Url.Content("~/Scripts/modernizr-2.0.6-development-only.js")" type="text/javascript">
 </script>
 	````
 1. Remove the HTML code within the **body** div element so that the page is relatively bare. 
 	<!-- strike:2-13 -->
 	````HTML
-	HTML
 	<body>
 	    <header>
 	        <div class="content-wrapper"> 
@@ -644,7 +642,6 @@ In this task, you will modify the default Index view of the web application to s
 1. Add an unordered list (an HTML ul element) as a child element of the div tag. Give the unordered list an id attribute value of **contacts**.
 
 	````HTML
-	HTML
 	<div id="body">
 	    <ul id="contacts"></ul>
 	</div>
@@ -653,7 +650,6 @@ In this task, you will modify the default Index view of the web application to s
 1. Add a new JavaScript code block just before the closing **head** tag of the **Index.cshtml** view. This code will perform the HTTP request to the Web API.
 
 	````HTML
-	HTML
 	<script type="text/javascript">
 	$(function()
 	{
@@ -719,7 +715,6 @@ In this task, you will continue to modify the Index view of the MVC application.
 1. Add the HTML code below to the file just after the unordered list you added in the previous task.
 
 	````HTML
-	HTML
 	<form id="saveContactForm" method="post">
 	<h3>Create a new Contact</h3>
 	<p>
@@ -738,7 +733,6 @@ In this task, you will continue to modify the Index view of the MVC application.
 
 	
 	````JavaScript
-	HTML
 	$('#saveContact').click(function()
 	    {
 	        var nm = $('#contactName').val();
