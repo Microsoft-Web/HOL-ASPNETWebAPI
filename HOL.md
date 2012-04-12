@@ -218,7 +218,9 @@ In this task, you will create the controller classes in which API methods will r
 
 1. In the **ContactController** class, select the word **string** in method definition of the Get method, and type the word **Contact**. Once the word is typed in, an indicator will appear at the beginning of the word _Contact_. Either hold down the Ctrl key and press the period (.) key or click the icon using your mouse to open up the assistance dialog in the code editor, to automatically fill in the **using** directive for the Models namespace.
 
- 	_Using Intellisense assistance for namespace declarations_
+	![Using Intellisense assistance for namespace declarations](images/Using Intellisense assistance for namespace declarations.png?raw=true)
+
+	_Using Intellisense assistance for namespace declarations_
 
 1. Modify the code for the **Get** method so that it returns an array of Contact model instances.
 
@@ -457,7 +459,7 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 
  	![Breaking at the constructor of the contact controller during debug](./images/Breaking-at-the-constructor-of-the-contact-controller-during-debug.png?raw=true "Breaking at the constructor of the contact controller during debug")
  
-		_Breaking at the constructor of the contact controller during debug_
+	_Breaking at the constructor of the contact controller during debug_
 
 1. Press F5 to continue execution. Visual Studio 11 should break again, this time as the Get controller method begins execution.
 
