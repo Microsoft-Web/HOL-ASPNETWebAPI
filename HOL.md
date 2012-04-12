@@ -132,7 +132,7 @@ In this task, you will use the new ASP.NET web project templates to create a Web
 
 In this task, you will create the controller classes in which API methods will reside.
 
-1. Delete the file named**ValuesController.cs** from the project.
+1. Delete the file named ValuesController.cs from the project.
 
 1. Right-click the **Controllers** folder in the project and select **Add | Controller** from the context menu.
 
