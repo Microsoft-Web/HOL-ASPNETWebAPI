@@ -16,7 +16,6 @@
   <DependencyChecker ScriptsFolder="env:PackagePath\Assets\DependencyChecker\scripts">.\Source\Setup\Dependencies.dep</DependencyChecker>
   <Technologies>
     <Technology>Visual Studio</Technology>
-	 <Technology>Web API</Technology>
-   <Technology>MVC</Technology>
+    <Technology>.NET Framework</Technology>
   </Technologies>
 </Lab>
