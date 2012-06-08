@@ -37,10 +37,11 @@ Throughout the lab document, you will be instructed to insert code blocks. For y
 
 To install the code snippets:
 
-1. Open a Windows Explorer window and browse to the lab's **Source\Setup** folder.
+1. Open a Windows Explorer window and browse to the lab's **Source** folder.
 
-1. Double-click the **Setup.cmd** file in this folder to install the Visual Studio code snippets.
+1. Execute the **Setup.cmd** file with Administrator privileges to launch the setup process that will configure your environment and install the Visual Studio code snippets for this lab.
 
+1. If the User Account Control dialog is shown, confirm the action to proceed.
  
 ### Using the Code Snippets ###
 

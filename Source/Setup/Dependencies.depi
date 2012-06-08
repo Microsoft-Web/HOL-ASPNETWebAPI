@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <DependencyCheckerConfiguration version="2.0">
   <title>Build RESTful APIs with WCF Web API Hands-on Lab</title>
-  
-  <dependencies>
-        <dependency 
-		hint="PowerShell2" 
-		name="Windows PowerShell 2.0"
-		type="WebPI" />
 
-	<dependency 
-		hint="Microsoft Visual Studio 11 Beta" 
-		name="Microsoft Visual Studio 11 Beta" 
-		description="Microsoft Visual Studio 11 Beta" 
-		helpLink="http://go.microsoft.com/fwlink/?LinkId=240160" 
-		disableSkip="false"
-		type="Uninstall" />
-	
+  <dependencies>
+	<dependency
+		 hint="Microsoft Visual Studio (?:Ultimate 2012 RC|Premium 2012 RC|Professional 2012 RC|Express 2012 for Windows 8).*;11.0"
+		 name="Microsoft Visual Studio 2012"
+		 description="Microsoft Visual Studio Ultimate 2012, Microsoft Visual Studio Premium 2012, Microsoft Visual Studio Professional 2012 or Microsoft Visual Studio 2012 Express for Windows 8"
+		 helpLink="http://go.microsoft.com/fwlink/?LinkId=240160"
+		 type="Uninstall" /> 		
+
   </dependencies>
-  
 </DependencyCheckerConfiguration>
