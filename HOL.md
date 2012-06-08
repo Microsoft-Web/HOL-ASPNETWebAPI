@@ -1,15 +1,16 @@
 ﻿#Build RESTful API's with ASP.NET Web API#
-
+<a name="Overview" />
 ## Overview ##
 
 In recent years, it has become clear that HTTP is not just for serving up HTML pages. It is also a powerful platform for building Web APIs, using a handful of verbs (GET, POST, and so forth) plus a few simple concepts such as _URIs_ and _headers_.
 ASP.NET Web API is a set of components that simplify HTTP programming. Because it is built on top of the ASP.NET MVC runtime, Web API automatically handles the low-level transport details of HTTP. At the same time, Web API naturally exposes the HTTP programming model. In fact, one goal of Web API is to _not_ abstract away the reality of HTTP. As a result, Web API is both flexible and easy to extend. 
 In this hands-on lab, you will use Web API to build a simple REST API for a contact manager application. You will also build a client to consume the API.
-The REST architectural style has proven to be an effective way to leverage HTTP - although it is certainly not the only valid approach to HTTP. The contact manager will expose the following RESTful methods.
+The REST architectural style has proven to be an effective way to leverage HTTP - although it is certainly not the only valid approach to HTTP. The contact manager will expose the RESTful for listing, adding and removing contacts, among others.
 This lab requires a basic understanding of HTTP, REST, and assumes you have a basic working knowledge of HTML, JavaScript, and jQuery.
 
 > **Note:** The ASP.NET Web site has an area dedicated to the ASP.NET Web API framework at [http://asp.net/web-api](http://asp.net/web-api). This site will continue to provide late-breaking information, samples, and news related to Web API, so check it frequently if you'd like to delve deeper into the art of creating custom Web API's available to virtually any device or development framework.
 
+<a name="Objectives" />
 ### Objectives ###
 
 In this hands-on lab, you will learn how to:
@@ -20,16 +21,16 @@ In this hands-on lab, you will learn how to:
 
 - Use the Microsoft Managed Extensibility Framework (MEF 2.0) to create a loosely-coupled and reusable componentized architecture
 
- 
+<a name="Prerequisites" />
 ### Prerequisites ###
 
 The following is required to complete this hands-on lab:
 
-- [Microsoft Visual Studio 11 Beta](http://www.microsoft.com/visualstudio/11/)
+- [Microsoft Visual Studio 2012](http://www.microsoft.com/visualstudio/11/)
 
 - Windows PowerShell (for setup scripts - already installed on Windows 7 and Windows Server 2008 R2)
 
- 
+<a name="Setup" />
 ### Setup ###
 
 Throughout the lab document, you will be instructed to insert code blocks. For your convenience, most of that code is provided as Visual Studio Code Snippets, which you can use from within Visual Studio to avoid having to add it manually.
@@ -91,30 +92,33 @@ _Right-click where you want to insert the code snippet and select Insert Snippet
  
 _Pick the relevant snippet from the list, by clicking on it_
 
+<a name="Exercises"/>
 ## Exercises ##
 
 This hands-on lab includes the following exercise:
 
-1. Create a Read-Only Web API
+1. [Exercise 1: Create a Read-Only Web API ](#Exercise1)
 
-1. Extend the Read-Only Web API so that it persists data
+1. [Exercise 2: Extend the Read-Only Web API so that it persists data ](#Exercise2)
 
-1. Consume the Web API from an HTML Client
+1. [Exercise 3: Consume the Web API from an HTML Client ](#Exercise3)
 
  
 Estimated time to complete this lab: **60 minutes**.
 
 >**Note:** When you first start Visual Studio, you must select one of the predefined settings collections. Every predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this lab describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in these procedures that you need to take into account. 
 
+<a name="Exercise1" />
 ### Exercise 1: Create a Read-Only Web API ###
 
 In this exercise, you will implement the read-only GET methods for the contact manager.
 
+<a name="Ex1Task1" />
 #### Task 1 - Creating the API Project ####
 
 In this task, you will use the new ASP.NET web project templates to create a Web API web application.
 
-1. Run Visual Studio 11.
+1. Run **Visual Studio 2012**.
 
 1. From the **File** menu, select **New Project**. Select the **Visual C# | Web** project type from the project type tree view, then select the **ASP.NET MVC 4 Web Application** project type. Name the project **ContactManager** and then click OK.
 
@@ -127,7 +131,8 @@ In this task, you will use the new ASP.NET web project templates to create a Web
  	![Specifying the Web API project type](./images/Specifying-the-Web-API-project-type.png?raw=true "Specifying the Web API project type")
  
  	_Specifying the Web API project type_
- 
+
+<a name="Ex1Task2" />
 #### Task 2 - Creating the Contact Manager API Controllers ####
 
 In this task, you will create the controller classes in which API methods will reside.
@@ -168,7 +173,7 @@ In this task, you will create the controller classes in which API methods will r
  
 	_The default home page of an ASP.NET Web API application_
 
-1. Press the F12 key to open the Developer Tools window. Click the **Network** tab, and then click the **Start Capturing** button to begin capturing network traffic into the window.
+1. Press the **F12** key to open the Developer Tools window. Click the **Network** tab, and then click the **Start Capturing** button to begin capturing network traffic into the window.
 
  	![Opening the network tab and initiating network capture](./images/Opening-the-network-tab-and-initiating-network-capture.png?raw=true "Opening the network tab and initiating network capture")
  
@@ -180,19 +185,20 @@ In this task, you will create the controller classes in which API methods will r
  
 	_Viewing the output of the Web API request in the Network view_
 
-	> **Note:** Internet Explorer 9's default behavior at this point will be to ask if the user would like to save or open the stream resulting from the Web API call. The output will be a text file containing the JSON result of the Web API URL call. Press the cancel button unless you want to see the text contents of the output. 
+	> **Note:** Internet Explorer 10's default behavior at this point will be to ask if the user would like to save or open the stream resulting from the Web API call. The output will be a text file containing the JSON result of the Web API URL call. Press the cancel button unless you want to see the text contents of the output. 
 
 1. Click the **Go to detailed view** button to see more details about the response of this API call, then click the **Response body** tab to view the actual JSON response text.
 
  	![Viewing the JSON output text in the network monitor](./images/Viewing-the-JSON-output-text-in-the-network-monitor.png?raw=true "Viewing the JSON output text in the network monitor")
  
  	_Viewing the JSON output text in the network monitor_
- 
+
+<a name="Ex1Task3" />
 #### Task 3 - Creating the Contact Models and Augment the Contact Controller ####
 
 In this task, you will create the controller classes in which API methods will reside.
 
-1. Right-click the **Models** folder and select **Add | New Item** from the context menu.
+1. Right-click the **Models** folder and select **Add | Class...** from the context menu.
 
  	![Adding a new model to the web application](./images/Adding-a-new-model-to-the-web-application.png?raw=true "Adding a new model to the web application")
  
@@ -216,7 +222,7 @@ In this task, you will create the controller classes in which API methods will r
 	}
 	````
 
-1. In the **ContactController** class, select the word **string** in method definition of the Get method, and type the word **Contact**. Once the word is typed in, an indicator will appear at the beginning of the word _Contact_. Either hold down the Ctrl key and press the period (.) key or click the icon using your mouse to open up the assistance dialog in the code editor, to automatically fill in the **using** directive for the Models namespace.
+1. In the **ContactController** class, select the word **string** in method definition of the **Get** method, and type the word **Contact**. Once the word is typed in, an indicator will appear at the beginning of the word _Contact_. Either hold down the **Ctrl** key and press the period (.) key or click the icon using your mouse to open up the assistance dialog in the code editor, to automatically fill in the **using** directive for the Models namespace.
 
 	![Using Intellisense assistance for namespace declarations](images/Using-Intellisense-assistance-for-namespace-declarations.png?raw=true)
 
@@ -248,7 +254,7 @@ In this task, you will create the controller classes in which API methods will r
 1. Press **F5** to debug the web application in the browser. To view the changes made to the response output of the API, perform the following steps.
 
 	<ol type="a">
-<li>Once the browser opens, press F12 to re-open the developer tools.</li>
+<li>Once the browser opens, press <b>F12</b> to re-open the developer tools.</li>
 <li>Click the <b>Network</b> tab.</li>
 <li>Press the <b>Start Capturing</b> button.</li>
 <li>Add the URL suffix <b>/api/contact</b> to the URL in the address bar and press the Enter key.</li>
@@ -259,10 +265,11 @@ In this task, you will create the controller classes in which API methods will r
  	![JSON serialized output of a complex Web API method call](./images/JSON-serialized-output-of-a-complex-Web-API-method-call.png?raw=true "JSON serialized output of a complex Web API method call")
  
  	_JSON serialized output of a complex Web API method call_
- 
+
+<a name="Ex1Task4" />
 #### Task 4 - Extracting Functionality into a Service Layer and Injecting it Using MEF 2.0 ####
 
-This task will demonstrate how the Microsoft Managed Extensibility Framework (MEF) can provide more separation between controller logic and the services that offer functionality to Web API. MEF 2.0, which ships with the Microsoft .NET 4.5 Framework provides Dependency Injection features and makes it easy for developers to separate their service functionality from the controller layer, thereby allowing reusability of the services that actually do the work. MEF 2.0 is available via NuGet as a free component and is accessible via the Package Manager Console in Visual Studio 11.
+This task will demonstrate how the Microsoft Managed Extensibility Framework (MEF) can provide more separation between controller logic and the services that offer functionality to Web API. MEF 2.0, which ships with the Microsoft .NET 4.5 Framework provides Dependency Injection features and makes it easy for developers to separate their service functionality from the controller layer, thereby allowing reusability of the services that actually do the work. MEF 2.0 is available via NuGet as a free component and is accessible via the Package Manager Console in Visual Studio 2012.
 
 1. Click on the **Tools** menu and select **Library Package Manager | Package Manager Console** from the menu. The Package Manager Console window will open.
 
@@ -278,13 +285,13 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
  
 	_The MEF 2.0 Parts folder, which should contain service interfaces and implementations_
 
-1. Right-click the **Parts** folder and select **Add | Class** from the context menu.
+1. Right-click the **Parts** folder and select **Add | Class...** from the context menu.
 
  	![Adding a new class to the Parts folder](./images/Adding-a-new-class-to-the-Parts-folder.png?raw=true "Adding a new class to the Parts folder")
  
 	_Adding a new class to the Parts folder_
 
-1. When the **Specify Name for Item** dialog appears, name the new class **ContactRepository** and click **OK**.
+1. When the **Add New Item** dialog appears, name the new class **ContactRepository** and click **Add**.
 
  	![Creating a class file to contain the code for the Contact Repository service layer](./images/Creating-a-class-file-to-contain-the-code-for-the-Contact-Repository-service-layer.png?raw=true "Creating a class file to contain the code for the Contact Repository service layer")
  
@@ -296,7 +303,7 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	using ContactManager.Models;
 	````
 
-1. Add the following code to the **ContactRepository.cs** file to implement the contact repository interface and implementation class.
+1. Add the following code to the **ContactRepository.cs** file to create the contact repository interface and its implementation class.
 
 	(Code Snippet - _Web API Lab - Ex01 - Contact Repository_)
 
@@ -342,11 +349,21 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	}
 	````
 
-1. Put a breakpoint on the constructor of the **HomeController** class. Press F5 to begin a debugging session and note that the breakpoint is hit and an instance of the **ContactRepository** class has been passed to it.
+1. At the top of the file add a using statement for the **ContactManager.Parts** namespace.
+
+	(Code Snippet - _Web API Lab - Ex01 - Contact Repository Nampespace_)
+
+	````C#
+	using ContactManager.Parts;
+	````
+
+1. Put a breakpoint on the constructor of the **HomeController** class. Press **F5** to begin a debugging session and note that the breakpoint is hit and an instance of the **ContactRepository** class has been passed to it.
 
  	![The HomeController when passed a service instance via Dependency Injection](./images/The-HomeController-when-passed-a-service-instance-via-Dependency-Injection.png?raw=true "The HomeController when passed a service instance via Dependency Injection")
  
 	_The HomeController when passed a service instance via Dependency Injection_
+
+1. Stop debugging and remove the breakpoint.
 
 1. Add a reference to **System.Reflection.Context** to the project.
 
@@ -354,7 +371,7 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
  
 	_Adding a reference_
 
-1. Open the **Global.asax.cs** file in Visual Studio 11 if it is not already open in the IDE.
+1. Open the **Global.asax.cs** file in Visual Studio 2012 if it is not already open in the IDE.
 
 1. Add the following namespaces to the list of namespaces already included in the file.
 
@@ -366,6 +383,39 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	using System.ComponentModel.Composition.Web.Mvc;
 	````
 
+1. Add the following private class inside the **WebApiApplication** class in the **Global.asax** file.
+
+	````C#
+ private class DependencyResolverAdapter : System.Web.Http.Dependencies.IDependencyResolver
+        {
+            private System.Web.Mvc.IDependencyResolver _innerDependencyResolver;
+
+            public DependencyResolverAdapter(System.Web.Mvc.IDependencyResolver dependendyResolver)
+            {
+                this._innerDependencyResolver = dependendyResolver;
+            }
+
+            public System.Web.Http.Dependencies.IDependencyScope BeginScope()
+            {
+                return this;
+            }
+
+            public object GetService(Type serviceType)
+            {
+                return this._innerDependencyResolver.GetService(serviceType);
+            }
+
+            public IEnumerable<object> GetServices(Type serviceType)
+            {
+                return this._innerDependencyResolver.GetServices(serviceType);
+            }
+
+            public void Dispose()
+            {
+                // There is nothing to Dispose because nothing was created
+            }
+        }
+````
 1. Replace the **Application_Start** method with the following code. This code configures the MEF 2.0 runtime so that all controller classes - both standard MVC controllers _and_ Web API controllers - can use the same MEF service injection functionality.
 
 	(Code Snippet - _Web API Lab - Ex01 - Global MEF Wireup_)
@@ -375,8 +425,9 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	{
 	    AreaRegistration.RegisterAllAreas();
 	 
-	    RegisterGlobalFilters(GlobalFilters.Filters);
-	    RegisterRoutes(RouteTable.Routes);
+	    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+	    RouteConfig.RegisterRoutes(RouteTable.Routes);
+		BundleConfig.RegisterBundles(BundleTable.Bundles);
 	 
 	 var conventions = new RegistrationBuilder ();
 	 conventions.ForTypesDerivedFrom<IController>().Export();
@@ -395,14 +446,11 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	        .WithAssembly(typeof(WebApiApplication).Assembly, conventions)
 	     );
 	 
-	GlobalConfiguration.Configuration.ServiceResolver.SetResolver(
-	     t => DependencyResolver.Current.GetService(t),
-	     t => DependencyResolver.Current.GetServices(t)
-	     );
+	GlobalConfiguration.Configuration.DependencyResolver = new DependencyResolverAdapter(DependencyResolver.Current);
 	}
 	````
 
-	> **Note:** This step is necessary at the time of the Visual Studio 11 beta release. Future releases will probably enhance automatic support for Web API and reduce the code required to wire MEF 2.0 up to those controllers.
+	> **Note:** This step is necessary at the time of the Visual Studio 2012 RC release. Future releases will probably enhance automatic support for Web API and reduce the code required to wire MEF 2.0 up to those controllers.
 
 1. Open the **ContactController.cs** file if it is not already open.
 
@@ -445,29 +493,29 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
  
 	_Adding breakpoints to the contact controller_
 
-1. Press F5 to run the application.
+1. Press **F5** to run the application.
 
-1. When the browser opens, press F12 to open the developer tools.
+1. When the browser opens, press **F12** to open the developer tools.
 
 1. Click the **Network** tab.
 
 1. Click the **Start Capturing** button.
 
-1. Append the URL in the address bar with the suffix **/api/contact** and press the Enter key to load the API controller.
+1. Append the URL in the address bar with the suffix **/api/contact** and press **Enter** to load the API controller.
 
-1. Visual Studio 11 should break at the constructor.
+1. Visual Studio 2012 should break at the constructor.
 
  	![Breaking at the constructor of the contact controller during debug](./images/Breaking-at-the-constructor-of-the-contact-controller-during-debug.png?raw=true "Breaking at the constructor of the contact controller during debug")
  
 	_Breaking at the constructor of the contact controller during debug_
 
-1. Press F5 to continue execution. Visual Studio 11 should break again, this time as the Get controller method begins execution.
+1. Press **F5** to continue execution. Visual Studio 2012 should break again, this time as the Get controller method begins execution.
 
  	![Breaking within the Get method](./images/Breaking-within-the-Get-method.png?raw=true "Breaking within the Get method")
  
 	_Breaking within the Get method_
 
-1. Press F5 to continue.
+1. Press **F5** to continue.
 
 1. Go back to Internet Explorer if it is not already in focus. Note the network capture window.
 
@@ -475,29 +523,31 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
  
 	_Network view in Internet Explorer showing results of the Web API call_
 
-1. Click the Go to detailed view button.
+1. Click the **Go to detailed view** button.
 
 1. Click the **Response body** tab. Note the JSON output of the API call, and how it represents the two contacts retrieved by the service layer.
 
  	![Viewing the JSON output from the Web API in the developer tools window](./images/Viewing-the-JSON-output-from-the-Web-API-in-the-developer-tools-window.png?raw=true "Viewing the JSON output from the Web API in the developer tools window")
  
  	_Viewing the JSON output from the Web API in the developer tools window_
- 
+
+<a name="Exercise2" />
 ### Exercise 2: Create a Read/Write Web API ###
 
 In this exercise, you will implement POST, PUT, and DELETE methods for the contact manager to enable it with data-editing features.
 
+<a name="Ex2Task1" />
 #### Task 1 - Opening the Web API Project ####
 
 In this task, you will prepare to enhance the Web API project created in Exercise 1 so that it can accept user input.
 
-1. Open Visual Studio 11 if it is not already running.
+1. Open **Visual Studio 2012** if it is not already running.
 
-1. Open the project created in Exercise 1, or open the project in the **Source/CS/Ex02/Begin/ContactManager** folder that accompanied this lab.
+1. Open the project created in Exercise 1, or open the project in the **Source/Ex02/Begin/ContactManager** folder that accompanied this lab.
 
 1. Open the **Parts/ContactRepository.cs** file.
 
- 
+<a name="Ex2Task2" />
 #### Task 2 - Adding Data-Persistence Features to the Contact Repository Implementation ####
 
 In this task, you will augment the ContactRepository class of the Web API project created in Exercise 1 so that it can persist and accept user input and new Contact instances.
@@ -508,7 +558,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	const string cacheKey = "ContactStore";
 	````
 
-1. Add a constructor to the ContactRepository containing the following code.
+1. Add a constructor to the **ContactRepository** containing the following code.
 
 	(Code Snippet - _Web API Lab - Ex02 - Contact Repository Constructor_)
 
@@ -539,7 +589,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	}
 	````
 
-1. Modify the code for the GetAllContacts method as demonstrated below.
+1. Modify the code for the **GetAllContacts** method as demonstrated below.
 
 	(Code Snippet - _Web API Lab - Ex02 - Get All Contacts_)
 
@@ -564,7 +614,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	}
 	````
 
-	>**Note:** This example is for demonstration purposes and will use the web server's cache as a storage medium, so that the values will be available to multiple clients simultaneously, rather than use a Session storage mechanism or a Request storage lifetime. One could use Entity Framework, XML storage, or any other variety in place of the web server cache.
+	>**Note:** This example is for demostration purposes and will use the web server's cache as a storage medium, so that the values will be available to multiple clients simultaneously, rather than use a Session storage mechanism or a Request storage lifetime. One could use Entity Framework, XML storage, or any other variety in place of the web server cache.
 
 1. Add a new method named **SaveContact** to the **IContactRepository** interface to do the work of saving a contact. The **SaveContact** method should take a single **Contact** parameter and return a Boolean value indicating success or failure.
 
@@ -605,45 +655,23 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	    return false;
 	}
  	````
- 
+<a name="Exercise3" />
 ### Exercise 3: Consume the Web API from an HTML Client ###
 
 In this exercise, you will create an HTML client to call the Web API. This client will facilitate data exchange with the Web API using JavaScript and will display the results in a web browser using HTML markup.
 
+<a name="Ex3Task1" />
 #### Task 1 - Modifying the Index View to Provide a GUI for Displaying Contacts ####
 
 In this task, you will modify the default Index view of the web application to support the requirement of displaying the list of existing contacts in an HTML browser.
 
-1. Open Visual Studio 11 if it is not already open.
+1. Open **Visual Studio 2012** if it is not already open.
 
-1. Open the **ContactManager** solution located in the **CS/Ex03/Begin/ContactManager** folder accompanying this lab.
+1. Open the **ContactManager** solution located in the **Ex03/Begin/ContactManager** folder accompanying this lab.
 
 1. Open the **Views/Home/Index.cshtml** file.
 
-1. Add a script reference to load the jQuery JavaScript library at the top of the Index view.
-
-	````HTML
-	<script src="@Url.Content("~/Scripts/modernizr-2.0.6-development-only.js")" type="text/javascript">
-</script>
-	````
-1. Remove the HTML code within the **body** div element so that the page is relatively bare. 
-	<!-- strike:2-13 -->
-	````HTML
-	<body>
-	    <header>
-	        <div class="content-wrapper"> 
-	            <div class="float-left">
-	                <p class="site-title"><a href="/">ASP.NET Web API</a></p>
-	            </div>
-	        </div>
-	    </header>
-	    <div id="body">
-	        
-	    </div>
-	</body>
-	````
-
-1. Add an unordered list (an HTML ul element) as a child element of the div tag. Give the unordered list an id attribute value of **contacts**.
+1. Replace the HTML code within the **body** div element so that it looks like the following code. 
 
 	````HTML
 	<div id="body">
@@ -651,9 +679,10 @@ In this task, you will modify the default Index view of the web application to s
 	</div>
 	````
 
-1. Add a new JavaScript code block just before the closing **head** tag of the **Index.cshtml** view. This code will perform the HTTP request to the Web API.
+1. Add the following code at the bottom of the file to perform the HTTP request to the Web API.
 
 	````HTML
+@section scripts{
 	<script type="text/javascript">
 	$(function()
 	{
@@ -666,6 +695,7 @@ In this task, you will modify the default Index view of the web application to s
 	    });
 	});
 	</script>
+}
 	````
 
 1. Open the **ContactController.cs** file if it is not already open.
@@ -676,44 +706,45 @@ In this task, you will modify the default Index view of the web application to s
  
 	_Placing a breakpoint on the Get method of the API controller_
 
-1. Press the F5 key to run the project. The browser will load the HTML document.
+1. Press **F5** to run the project. The browser will load the HTML document.
+
+	> **Note:** Ensure that you are browsing to the root URL of your application.
 
 1. Once the page loads and the JavaScript executes, the breakpoint will be hit and the code execution will pause in the controller.
 
- 	![Debugging into the Web API call using Visual Studio 11](./images/Debugging-into-the-Web-API-call-using-Visual-Studio-11.png?raw=true "Debugging into the Web API call using Visual Studio 11")
+ 	![Debugging into the Web API call using Visual Studio 11](./images/Debugging-into-the-Web-API-call-using-Visual-Studio-11.png?raw=true "Debugging into the Web API call using Visual Studio 2012")
  
-	_Debugging into the Web API call using Visual Studio 11_
+	_Debugging into the Web API call using Visual Studio 2012_
 
-1. Press F5 or the debugging toolbar's **Continue** button to continue loading the view in the browser. Once the Web API call completes you should see the contacts returned from the Web API call displayed as list items in the browser.
+1. Press **F5** or the debugging toolbar's **Continue** button to continue loading the view in the browser. Once the Web API call completes you should see the contacts returned from the Web API call displayed as list items in the browser.
 
  	![Results of the API call displayed in the browser as list items](./images/Results-of-the-API-call-displayed-in-the-browser-as-list-items.png?raw=true "Results of the API call displayed in the browser as list items")
  
  	_Results of the API call displayed in the browser as list items_
- 
+
+1. Stop debugging.
+<a name="Ex3Task2" />
 #### Task 2 - Modifying the Index View to Provide a GUI for Creating Contacts ####
 
 In this task, you will continue to modify the Index view of the MVC application. A form will be added to the HTML page that will capture user input and send it to the Web API to create a new Contact, and a new Web API controller method will be created to collect date from the GUI.
 
-1. Open the **ContactController.cs** file in Visual Studio 11 if it is not already open.
+1. Open the **ContactController.cs** file in Visual Studio 2012 if it is not already open.
 
 1. Add a new method to the controller class named **Post** as demonstrated in the following code.
 
 	(Code Snippet - _Web API Lab - Ex03 - Post Method_)
 
 	````C#
-	public HttpResponseMessage<Contact> Post(Contact contact)
+	public HttpResponseMessage Post(Contact contact)
 	{
-	    this._contactRepository.SaveContact(contact);
-	 
-	    var response = new HttpResponseMessage<Contact>(contact)
-	        {
-	            StatusCode = System.Net.HttpStatusCode.Created
-	        };
-	 
-	    return response;
-	}
-	````
+		 this._contactRepository.SaveContact(contact);
 
+         var response = Request.CreateResponse<Contact>(System.Net.HttpStatusCode.Created, contact);
+            
+         return response;
+	}
+
+	````
 1. Open the **Index.cshtml** file in Visual Studio if it is not already open.
 
 1. Add the HTML code below to the file just after the unordered list you added in the previous task.
@@ -733,7 +764,7 @@ In this task, you will continue to modify the Index view of the MVC application.
 	</form>
 	````
 
-1. Within the script element in the document's head, add the following code to handle button-click events, which will post the data to the Web API using an HTTP POST call.
+1. Within the script element at the botton of the document, add the following code to handle button-click events, which will post the data to the Web API using an HTTP POST call.
 
 	
 	````JavaScript
@@ -755,7 +786,7 @@ In this task, you will continue to modify the Index view of the MVC application.
 
 1. In **ContactController.cs**, place a breakpoint on the **Post** method.
 
-1. Press the F5 key to run the application in the browser.
+1. Press **F5** to run the application in the browser.
 
 1. Once the page is loaded in the browser, type in a new contact name and Id and click the **Save** button.
 
@@ -781,7 +812,7 @@ In this task, you will continue to modify the Index view of the MVC application.
  
 	_The browser reflects successful creation of the new contact instance_
 
- 
+<a name="Summary" />
 ## Summary ##
 
 This lab has introduced you to the new ASP.NET Web API framework and to the implementation of RESTful Web API's using the framework. From here, you could create a new repository that facilitates data persistence using any number of mechanisms and wire that service up rather than the simple one provided as an example in this lab. Web API supports a number of additional features, such as enabling communication from non-HTML clients written in any language that supports HTTP and JSON or XML. The ability to host a Web API outside of a typical web application is also possible, as well as is the ability to create your own serialization formats.
