@@ -30,19 +30,6 @@ The following is required to complete this hands-on lab:
 
 - Windows PowerShell (for setup scripts - already installed on Windows 7 and Windows Server 2008 R2)
 
-<a name="Setup" />
-### Setup ###
-
-Throughout the lab document, you will be instructed to insert code blocks. For your convenience, most of that code is provided as Visual Studio Code Snippets, which you can use from within Visual Studio to avoid having to add it manually.
-
-To install the code snippets:
-
-1. Open a Windows Explorer window and browse to the lab's **Source** folder.
-
-1. Execute the **Setup.cmd** file with Administrator privileges to launch the setup process that will configure your environment and install the Visual Studio code snippets for this lab.
-
-1. If the User Account Control dialog is shown, confirm the action to proceed.
- 
 ### Using the Code Snippets ###
 
 With code snippets, you have all the code you need at your fingertips. The lab document will tell you exactly when you can use them, as shown in the following figure.
@@ -119,15 +106,15 @@ In this exercise, you will implement the read-only GET methods for the contact m
 
 In this task, you will use the new ASP.NET web project templates to create a Web API web application.
 
-1. Run **Visual Studio 2012**.
+1. Run **Visual Studio 2012 Express for Web**, to do this go to **Start** and type **VS Express for Web** then press **Enter**.
 
-1. From the **File** menu, select **New Project**. Select the **Visual C# | Web** project type from the project type tree view, then select the **ASP.NET MVC 4 Web Application** project type. Name the project **ContactManager** and then click OK.
+1. From the **File** menu, select **New Project**. Select the **Visual C# | Web** project type from the project type tree view, then select the **ASP.NET MVC 4 Web Application** project type. Set the project's **Name** to _ContactManager_ and the **Solution name** to _Begin_, then click **OK**.
 
  	![Creating a new MVC 4.0 Web Application Project](./images/Creating-a-new-MVC-4.0-Web-Application-Project.png?raw=true "Creating a new MVC 4.0 Web Application Project")
  
 	_Creating a new MVC 4.0 Web Application Project_
 
-1. In the ASP.NET MVC 4 project type dialog, select the **Web API** project type. Click OK.
+1. In the ASP.NET MVC 4 project type dialog, select the **Web API** project type. Click **OK**.
 
  	![Specifying the Web API project type](./images/Specifying-the-Web-API-project-type.png?raw=true "Specifying the Web API project type")
  
@@ -138,7 +125,7 @@ In this task, you will use the new ASP.NET web project templates to create a Web
 
 In this task, you will create the controller classes in which API methods will reside.
 
-1. Delete the file named **ValuesController.cs** from the project.
+1. Delete the file named **ValuesController.cs** within **Controllers** folder from the project.
 
 1. Right-click the **Controllers** folder in the project and select **Add | Controller** from the context menu.
 
@@ -152,20 +139,19 @@ In this task, you will create the controller classes in which API methods will r
  
 	_Using the Add Controller dialog to create a new Web API controller_
 
-1. Add the code below to the **ContactController.**
+1. Add the following code to the **ContactController**.
 
 	(Code Snippet - _Web API Lab - Ex01 - Get API Method_)
-
+	<!-- mark:1-8 -->
 	````C#
-
 	public string[] Get()
-	{
-	    return new string[]
-	    {
-	        "Hello",
-	        "World"
-	    };
-	}
+	  {
+			return new string[]
+			{
+				 "Hello",
+				 "World"
+			};
+	  }
 	````
 
 1. Press **F5** to debug the application. The default home page for a Web API project should appear.
@@ -174,7 +160,7 @@ In this task, you will create the controller classes in which API methods will r
  
 	_The default home page of an ASP.NET Web API application_
 
-1. Press the **F12** key to open the Developer Tools window. Click the **Network** tab, and then click the **Start Capturing** button to begin capturing network traffic into the window.
+1. Press the **F12** key to open the **Developer Tools** window. Click the **Network** tab, and then click the **Start Capturing** button to begin capturing network traffic into the window.
 
  	![Opening the network tab and initiating network capture](./images/Opening-the-network-tab-and-initiating-network-capture.png?raw=true "Opening the network tab and initiating network capture")
  
@@ -186,9 +172,15 @@ In this task, you will create the controller classes in which API methods will r
  
 	_Viewing the output of the Web API request in the Network view_
 
-	> **Note:** Internet Explorer 10's default behavior at this point will be to ask if the user would like to save or open the stream resulting from the Web API call. The output will be a text file containing the JSON result of the Web API URL call. Press the cancel button unless you want to see the text contents of the output. 
+	> **Note:** Internet Explorer 10's default behavior at this point will be to ask if the user would like to save or open the stream resulting from the Web API call. The output will be a text file containing the JSON result of the Web API URL call. Do not cancel the dialog in order to be able to watch the response's content through Developers Tool window. 
 
-1. Click the **Go to detailed view** button to see more details about the response of this API call, then click the **Response body** tab to view the actual JSON response text.
+1. Click the **Go to detailed view** button to see more details about the response of this API call.
+
+	![Switch to Detailed View](images/switch-to-details-view.png?raw=true "Switch to Details View")
+
+	_Switch to Detailed View_
+
+1. Click the **Response body** tab to view the actual JSON response text.
 
  	![Viewing the JSON output text in the network monitor](./images/Viewing-the-JSON-output-text-in-the-network-monitor.png?raw=true "Viewing the JSON output text in the network monitor")
  
@@ -211,10 +203,11 @@ In this task, you will create the controller classes in which API methods will r
  
 	_Creating the new Contact class file_
 
-1. Add the following code to the Contact class.
+1. Add the following highlighted code to the **Contact** class.
 
 	(Code Snippet - _Web API Lab - Ex01 - Get API Method_)
-
+	
+	<!-- mark: 3-4 -->
 	````C#
 	public class Contact
 	{
@@ -223,7 +216,7 @@ In this task, you will create the controller classes in which API methods will r
 	}
 	````
 
-1. In the **ContactController** class, select the word **string** in method definition of the **Get** method, and type the word **Contact**. Once the word is typed in, an indicator will appear at the beginning of the word _Contact_. Either hold down the **Ctrl** key and press the period (.) key or click the icon using your mouse to open up the assistance dialog in the code editor, to automatically fill in the **using** directive for the Models namespace.
+1. In the **ContactController** class, select the word **string** in method definition of the **Get** method, and type the word _Contact_. Once the word is typed in, an indicator will appear at the beginning of the word **Contact**. Either hold down the **Ctrl** key and press the period (.) key or click the icon using your mouse to open up the assistance dialog in the code editor, to automatically fill in the **using** directive for the Models namespace.
 
 	![Using Intellisense assistance for namespace declarations](images/Using-Intellisense-assistance-for-namespace-declarations.png?raw=true)
 
@@ -233,6 +226,7 @@ In this task, you will create the controller classes in which API methods will r
 
 	(Code Snippet - _Web API Lab - Ex01 - Returning a list of contacts_)
 
+	<!-- mark:3-15 -->
 	````C#
 	public Contact[] Get()
 	{
@@ -253,44 +247,33 @@ In this task, you will create the controller classes in which API methods will r
 	````
 
 1. Press **F5** to debug the web application in the browser. To view the changes made to the response output of the API, perform the following steps.
-
-	<ol type="a">
-<li>Once the browser opens, press <b>F12</b> to re-open the developer tools.</li>
-<li>Click the <b>Network</b> tab.</li>
-<li>Press the <b>Start Capturing</b> button.</li>
-<li>Add the URL suffix <b>/api/contact</b> to the URL in the address bar and press the Enter key.</li>
-<li>Press the <b>Go to detailed view</b> button.</li>
-<li>Select the <b>Response body</b> tab. You should see a JSON string representing the serialized form of an array of Contact instances.</li>
-</ol>
+	1. Once the browser opens, press **F12** to re-open the developer tools.
+	1. Click the **Network** tab.
+	1. Press the **Start Capturing** button.
+	1. Add the URL suffix **/api/contact** to the URL in the address bar and press the **Enter** key.
+	1. Press the **Go to detailed view** button.
+	1. Select the **Response body** tab. You should see a JSON string representing the serialized form of an array of Contact instances.
 
  	![JSON serialized output of a complex Web API method call](./images/JSON-serialized-output-of-a-complex-Web-API-method-call.png?raw=true "JSON serialized output of a complex Web API method call")
  
  	_JSON serialized output of a complex Web API method call_
 
 <a name="Ex1Task4" />
-#### Task 4 - Extracting Functionality into a Service Layer and Injecting it Using MEF 2.0 ####
+#### Task 4 - Extracting Functionality into a Service Layer ####
 
-This task will demonstrate how the Microsoft Managed Extensibility Framework (MEF) can provide more separation between controller logic and the services that offer functionality to Web API. MEF 2.0, which ships with the Microsoft .NET 4.5 Framework provides Dependency Injection features and makes it easy for developers to separate their service functionality from the controller layer, thereby allowing reusability of the services that actually do the work. MEF 2.0 is available via NuGet as a free component and is accessible via the Package Manager Console in Visual Studio 2012.
+This task will demonstrate how to extract functionality into a Service layer to make it easy for developers to separate their service functionality from the controller layer, thereby allowing reusability of the services that actually do the work.
 
-1. Click on the **Tools** menu and select **Library Package Manager | Package Manager Console** from the menu. The Package Manager Console window will open.
+1. Create a new folder in the solution root and name it **Services**. To do this, right click **ContactManager** solution, select **Add** | **New Folder**, name it _Services_.
 
-1. In the Package Manager Window, type the command **Install-Package Microsoft.Mef.MvcCompositionProvider -Prerelease** in order to pull the package from NuGet and add it to the Web API project.
+	![Creating Services folder](images/creating-services-folder.png?raw=true "Creating Services folder")
 
- 	![Adding a reference to MEF 2.0 using NuGet](./images/Adding-a-reference-to-MEF-2.0-using-NuGet.png?raw=true "Adding a reference to MEF 2.0 using NuGet")
+	_Creating Services folder_
+
+1. Right-click the **Services** folder and select **Add | Class...** from the context menu.
+
+	![Adding a new class to the Services folder](images/adding-a-new-class-to-the-services-folder.png?raw=true "Adding a new class to the Services folder")
  
-	_Adding a reference to MEF 2.0 using NuGet_
-
-1. A new folder will be added to the project during the MEF package install process. The **Parts** folder's purpose is to contain any custom service interfaces and implementations required by the Web API application to function. Within the folder will be a new file by default, named **Part1.cs.** Delete this file, as it won't be used by the Web API application.
-
- 	![The MEF 2.0 Parts folder, which should contain service interfaces and implementations](./images/The-MEF-2.0-Parts-folder,-which-should-contain-service-interfaces-and-implementations.png?raw=true "The MEF 2.0 Parts folder, which should contain service interfaces and implementations")
- 
-	_The MEF 2.0 Parts folder, which should contain service interfaces and implementations_
-
-1. Right-click the **Parts** folder and select **Add | Class...** from the context menu.
-
- 	![Adding a new class to the Parts folder](./images/Adding-a-new-class-to-the-Parts-folder.png?raw=true "Adding a new class to the Parts folder")
- 
-	_Adding a new class to the Parts folder_
+	_Adding a new class to the Services folder_
 
 1. When the **Add New Item** dialog appears, name the new class **ContactRepository** and click **Add**.
 
@@ -300,21 +283,17 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 
 1. Add a using directive to the **ContactRepository.cs** file to include the models namespace.
 
+	<!-- mark: 1 -->
 	````C#
 	using ContactManager.Models;
 	````
 
-1. Add the following code to the **ContactRepository.cs** file to create the contact repository interface and its implementation class.
+1. Add the following highlighted code to the **ContactRepository.cs** file to implement GetAllContacts method.
 
 	(Code Snippet - _Web API Lab - Ex01 - Contact Repository_)
-
+	<!-- mark: 3-18 -->
 	````C#
-	public interface IContactRepository
-	{
-	    Contact[] GetAllContacts();
-	}
-	 
-	public class ContactRepository : IContactRepository
+	public class ContactRepository
 	{
 	    public Contact[] GetAllContacts()
 	    {
@@ -335,145 +314,31 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	}
 	````
 
-	> **Note:** The interface and class could be separated into separate files if preferred.
-
-1. Change the **HomeController.cs** code so that it supports constructor injection and add a private field to represent the instance supplied at construction, so that the rest of the class members can make use of the service implementation.
-
-	(Code Snippet - _Web API Lab - Ex01 - Contact Repository Implementation_)
-
-	````C#
-	private IContactRepository _contactRepository;
-	 
-	public HomeController(IContactRepository contactRepo)
-	{
-	    _contactRepository = contactRepo;
-	}
-	````
-
-1. At the top of the file add a using statement for the **ContactManager.Parts** namespace.
-
-	(Code Snippet - _Web API Lab - Ex01 - Contact Repository Nampespace_)
-
-	````C#
-	using ContactManager.Parts;
-	````
-
-1. Put a breakpoint on the constructor of the **HomeController** class. Press **F5** to begin a debugging session and note that the breakpoint is hit and an instance of the **ContactRepository** class has been passed to it.
-
- 	![The HomeController when passed a service instance via Dependency Injection](./images/The-HomeController-when-passed-a-service-instance-via-Dependency-Injection.png?raw=true "The HomeController when passed a service instance via Dependency Injection")
- 
-	_The HomeController when passed a service instance via Dependency Injection_
-
-1. Stop debugging and remove the breakpoint.
-
-1. Add a reference to **System.Reflection.Context** to the project.
-
- 	![Adding a reference](./images/Adding-a-reference.png?raw=true "Adding a reference")
- 
-	_Adding a reference_
-
-1. Open the **Global.asax.cs** file in Visual Studio 2012 if it is not already open in the IDE.
-
-1. Add the following namespaces to the list of namespaces already included in the file.
-
-	(Code Snippet - _Web API Lab - Ex01 - Namespaces for MEF_)
-
-	````C#
-	using System.ComponentModel.Composition.Lightweight.Hosting;
-	using System.ComponentModel.Composition.Registration;
-	using System.ComponentModel.Composition.Web.Mvc;
-	````
-
-1. Add the following private class inside the **WebApiApplication** class in the **Global.asax** file.
-
-	````C#
- private class DependencyResolverAdapter : System.Web.Http.Dependencies.IDependencyResolver
-        {
-            private System.Web.Mvc.IDependencyResolver _innerDependencyResolver;
-
-            public DependencyResolverAdapter(System.Web.Mvc.IDependencyResolver dependendyResolver)
-            {
-                this._innerDependencyResolver = dependendyResolver;
-            }
-
-            public System.Web.Http.Dependencies.IDependencyScope BeginScope()
-            {
-                return this;
-            }
-
-            public object GetService(Type serviceType)
-            {
-                return this._innerDependencyResolver.GetService(serviceType);
-            }
-
-            public IEnumerable<object> GetServices(Type serviceType)
-            {
-                return this._innerDependencyResolver.GetServices(serviceType);
-            }
-
-            public void Dispose()
-            {
-                // There is nothing to Dispose because nothing was created
-            }
-        }
-````
-1. Replace the **Application_Start** method with the following code. This code configures the MEF 2.0 runtime so that all controller classes - both standard MVC controllers _and_ Web API controllers - can use the same MEF service injection functionality.
-
-	(Code Snippet - _Web API Lab - Ex01 - Global MEF Wireup_)
-
-	````C#
-	protected void Application_Start()
-	{
-	    AreaRegistration.RegisterAllAreas();
-	 
-	    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-	    RouteConfig.RegisterRoutes(RouteTable.Routes);
-		BundleConfig.RegisterBundles(BundleTable.Bundles);
-	 
-	 var conventions = new RegistrationBuilder ();
-	 conventions.ForTypesDerivedFrom<IController>().Export();
-	 conventions.ForTypesDerivedFrom<ApiController>().Export();
-	 
-	 conventions
-	    .ForTypesMatching((t) => 
-	        t.Namespace != null && 
-	            (t.Namespace.Contains(".Parts.") || 
-	                t.Namespace.EndsWith("Parts")))
-	        .Export()
-	        .ExportInterfaces();
-	 
-	 CompositionProvider.SetConfiguration(
-	     new ContainerConfiguration()
-	        .WithAssembly(typeof(WebApiApplication).Assembly, conventions)
-	     );
-	 
-	GlobalConfiguration.Configuration.DependencyResolver = new DependencyResolverAdapter(DependencyResolver.Current);
-	}
-	````
-
-	> **Note:** This step is necessary at the time of the Visual Studio 2012 RC release. Future releases will probably enhance automatic support for Web API and reduce the code required to wire MEF 2.0 up to those controllers.
 
 1. Open the **ContactController.cs** file if it is not already open.
 
 1. Add the following using statement to the namespace declaration section of the file.
 
+	<!-- mark: 1 -->
 	````C#
-	using ContactManager.Parts;
+	using ContactManager.Services;
 	````
 
-1. Change the **ContactController.cs** code so that it supports constructor injection and add a private field to represent the instance supplied at construction, so that the rest of the class members can make use of the service implementation already in use by the HomeController class.
+1. Add the following highlighted code to the **ContactController.cs** class to add a private field to represent the instance of the repository, so that the rest of the class members can make use of the service implementation.
 
 	(Code Snippet - _Web API Lab - Ex01 - Contact Controller_)
 
+	<!-- mark: 2-7 -->
 	````C#
 	public class ContactController : ApiController
 	{
-	    private IContactRepository _contactRepository;
-	 
-	    public ContactController(IContactRepository contactRepo)
-	    {
-	        _contactRepository = contactRepo;
-	    }     
+	    private ContactRepository _contactRepository;
+
+        public ContactController()
+        {
+            this._contactRepository = new ContactRepository();
+        } 
+		...
 	}
 	````
 
@@ -481,6 +346,7 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 
 	(Code Snippet - _Web API Lab - Ex01 - Returning a list of contacts via the repository_)
 
+	<!-- mark: 3 -->
 	````C#
 	public Contact[] Get()
 	{
@@ -488,7 +354,7 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 	}
 	````
 
-1. Put a breakpoint on the **ContactController's** constructor, and on the **Get** method definition.
+1. Put a breakpoint on the **ContactController**'s **Get** method definition.
 
  	![Adding breakpoints to the contact controller](./images/Adding-breakpoints-to-the-contact-controller.png?raw=true "Adding breakpoints to the contact controller")
  
@@ -504,13 +370,7 @@ This task will demonstrate how the Microsoft Managed Extensibility Framework (ME
 
 1. Append the URL in the address bar with the suffix **/api/contact** and press **Enter** to load the API controller.
 
-1. Visual Studio 2012 should break at the constructor.
-
- 	![Breaking at the constructor of the contact controller during debug](./images/Breaking-at-the-constructor-of-the-contact-controller-during-debug.png?raw=true "Breaking at the constructor of the contact controller during debug")
- 
-	_Breaking at the constructor of the contact controller during debug_
-
-1. Press **F5** to continue execution. Visual Studio 2012 should break again, this time as the Get controller method begins execution.
+1. Visual Studio 2012 should break once **Get** method begins execution.
 
  	![Breaking within the Get method](./images/Breaking-within-the-Get-method.png?raw=true "Breaking within the Get method")
  

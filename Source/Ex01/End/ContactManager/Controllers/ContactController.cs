@@ -1,28 +1,26 @@
-﻿using System;
+﻿using ContactManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ContactManager.Models;
-using ContactManager.Parts;
+using ContactManager.Services;
 
 namespace ContactManager.Controllers
 {
     public class ContactController : ApiController
     {
-        private IContactRepository _contactRepository;
+        private ContactRepository _contactRepository;
 
-        public ContactController(IContactRepository contactRepo)
+        public ContactController()
         {
-            _contactRepository = contactRepo;
-        }
+            this._contactRepository = new ContactRepository();
+        } 
 
         public Contact[] Get()
         {
             return _contactRepository.GetAllContacts();
         }
-
-
     }
 }
