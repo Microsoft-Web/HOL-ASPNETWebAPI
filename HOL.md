@@ -436,7 +436,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	}
 	````
 
-	>**Note:** This example is for demostration purposes and will use the web server's cache as a storage medium, so that the values will be available to multiple clients simultaneously, rather than use a Session storage mechanism or a Request storage lifetime. One could use Entity Framework, XML storage, or any other variety in place of the web server cache.
+	>**Note:** This example is for demonstration purposes and will use the web server's cache as a storage medium, so that the values will be available to multiple clients simultaneously, rather than use a Session storage mechanism or a Request storage lifetime. One could use Entity Framework, XML storage, or any other variety in place of the web server cache.
 
 1. Implement a new method named **SaveContact** to the **ContactRepository** class to do the work of saving a contact. The **SaveContact** method should take a single **Contact** parameter and return a Boolean value indicating success or failure.
 
@@ -587,7 +587,7 @@ In this task, you will continue to modify the Index view of the MVC application.
 	</form>
 	````
 
-1. Within the script element at the botton of the document, add the following highlighted code to handle button-click events, which will post the data to the Web API using an HTTP POST call.
+1. Within the script element at the bottom of the document, add the following highlighted code to handle button-click events, which will post the data to the Web API using an HTTP POST call.
 
 	<!-- mark: 3-16 -->
 	````JavaScript
