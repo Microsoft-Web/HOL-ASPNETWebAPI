@@ -1,0 +1,51 @@
+﻿<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <a href="~/">ASP.NET Web API</a></p>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <ul id="contacts"></ul>
+</div>
+<form id="saveContactForm" method="post">
+<h3>Create a new Contact</h3>
+<p>
+    <label for="contactId">Contact Id:</label>
+    <input type="text" name="Id" />
+</p>
+<p>
+    <label for="contactName">Contact Name:</label>
+    <input type="text" name="Name" />
+</p>
+<input type="button" id="saveContact" value="Save" />
+</form>
+
+@section scripts{
+	<script type="text/javascript">
+	$(function()
+	{
+			$.getJSON('/api/contact', function(contactsJsonPayload)
+			{
+				$(contactsJsonPayload).each(function(i, item)
+				{
+					$('#contacts').append('<li>' + item.Name + '</li>');
+				});
+			});
+	});
+
+	$('#saveContact').click(function () {
+	    var nm = $('#contactName').val();
+	    var id = $('#contactId').val();
+
+	    $.post("api/contact",
+              $("#saveContactForm").serialize(),
+              function (value) {
+                  $('#contacts').append('<li>' + value.Name + '</li>');
+              },
+              "json"
+        );
+	});
+	</script>
+}
