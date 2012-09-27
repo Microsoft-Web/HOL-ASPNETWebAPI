@@ -9,6 +9,8 @@ The REST architectural style has proven to be an effective way to leverage HTTP 
 This lab requires a basic understanding of HTTP, REST, and assumes you have a basic working knowledge of HTML, JavaScript, and jQuery.
 
 > **Note:** The ASP.NET Web site has an area dedicated to the ASP.NET Web API framework at [http://asp.net/web-api](http://asp.net/web-api). This site will continue to provide late-breaking information, samples, and news related to Web API, so check it frequently if you'd like to delve deeper into the art of creating custom Web API's available to virtually any device or development framework.
+>
+> ASP.NET Web API, similar to ASP.NET MVC 4, has great flexibility in terms of separating the service layer from the controllers allowing you to use several of the available Dependency Injection frameworks fairly easy. There is a good sample in MSDN that shows how to use Ninject for dependency injection in an ASP.NET Web API project that you can download it from [here](http://code.msdn.microsoft.com/ASPNET-Web-API-JavaScript-d0d64dd7).
 
 <a name="Objectives" />
 ### Objectives ###
