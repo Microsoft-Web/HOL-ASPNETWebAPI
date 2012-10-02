@@ -162,7 +162,7 @@ In this task, you will create the controller classes in which API methods will r
 
 1. Add the following highlighted code to the **Contact** class.
 
-	(Code Snippet - _Web API Lab - Ex01 - Get API Method_)
+	(Code Snippet - _Web API Lab - Ex01 - Contact Class_)
 	
 	<!-- mark: 3-4 -->
 	````C#
