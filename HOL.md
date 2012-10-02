@@ -35,7 +35,7 @@ The following is required to complete this hands-on lab:
 
 For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Setup\CodeSnippets.vsi** file.
  
-If you are not familiar with the Visual Studio Code Snippets, and want to learn how to use them, you can refer to the appendix from this document "[Appendix: Using Code Snippets](#AppendixA)".
+If you are not familiar with the Visual Studio Code Snippets, and want to learn how to use them, you can refer to the appendix A from this document "[Appendix A: Using Code Snippets](#AppendixA)".
 
 <a name="Exercises"/>
 ## Exercises ##
@@ -117,7 +117,7 @@ In this task, you will create the controller classes in which API methods will r
  
 	_The default home page of an ASP.NET Web API application_
 
-1. Press the **F12** key to open the **Developer Tools** window. Click the **Network** tab, and then click the **Start Capturing** button to begin capturing network traffic into the window.
+1. In the Internet Explorer window, press the **F12** key to open the **Developer Tools** window. Click the **Network** tab, and then click the **Start Capturing** button to begin capturing network traffic into the window.
 
  	![Opening the network tab and initiating network capture](./images/Opening-the-network-tab-and-initiating-network-capture.png?raw=true "Opening the network tab and initiating network capture")
  
@@ -204,7 +204,7 @@ In this task, you will create the controller classes in which API methods will r
 	````
 
 1. Press **F5** to debug the web application in the browser. To view the changes made to the response output of the API, perform the following steps.
-	1. Once the browser opens, press **F12** to re-open the developer tools.
+	1. Once the browser opens, press **F12** if the developer tools are not open yet.
 	1. Click the **Network** tab.
 	1. Press the **Start Capturing** button.
 	1. Add the URL suffix **/api/contact** to the URL in the address bar and press the **Enter** key.
@@ -220,7 +220,7 @@ In this task, you will create the controller classes in which API methods will r
 
 This task will demonstrate how to extract functionality into a Service layer to make it easy for developers to separate their service functionality from the controller layer, thereby allowing reusability of the services that actually do the work.
 
-1. Create a new folder in the solution root and name it **Services**. To do this, right click **ContactManager** solution, select **Add** | **New Folder**, name it _Services_.
+1. Create a new folder in the solution root and name it **Services**. To do this, right-click **ContactManager** project, select **Add** | **New Folder**, name it _Services_.
 
 	![Creating Services folder](images/creating-services-folder.png?raw=true "Creating Services folder")
 
@@ -375,7 +375,7 @@ In this task, you will prepare to enhance the Web API project created in Exercis
 
 In this task, you will augment the ContactRepository class of the Web API project created in Exercise 1 so that it can persist and accept user input and new Contact instances.
 
-1. Add the following constant to the class to represent the name of the web server cache item key name later in this exercise.
+1. Add the following constant to the **ContactRepository** class to represent the name of the web server cache item key name later in this exercise.
 
 	<!-- mark: 1 -->
 	````C#
@@ -481,8 +481,6 @@ In this exercise, you will create an HTML client to call the Web API. This clien
 In this task, you will modify the default Index view of the web application to support the requirement of displaying the list of existing contacts in an HTML browser.
 
 1. Open **Visual Studio 2012 Express for Web** if it is not already open.
-
-1. Open the **Begin** solution located in the **Ex03/Begin** folder accompanying this lab.
 
 1. Open the **Begin** solution located at **Source/Ex03-ConsumingWebAPI/Begin/** folder. Otherwise, you might continue using the **End** solution obtained by completing the previous exercise.
 	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click **Project** and select **Manage NuGet Packages**.
