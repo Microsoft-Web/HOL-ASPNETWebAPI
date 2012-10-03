@@ -13,6 +13,7 @@
     <Technology>Visual Studio</Technology>
     <Technology>.NET Framework</Technology>
 	<Technology>ASP.NET MVC</Technology>
+	<Technology>ASP.NET Web Api</Technology>
   </Technologies>
   <CustomProperties>
     <Property Name="GitHubRepository" Value="https://github.com/Microsoft-Web/HOL-ASPNETWebAPI" />
