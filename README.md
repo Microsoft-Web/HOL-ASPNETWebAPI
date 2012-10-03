@@ -4,7 +4,9 @@
 
 ### Introduction ###
 
-This Hands-On Lab is a step-by-step guide that is designed to help you learn ASP.NET Web API. It provides instructions to guide you through the process of developing a complete application using ASP.NET Web API.
+These Hands-On Labs are sets of step-by-step guides that are designed to help you learn Visual Studio 2012, ASP.NET 4.5 WebForms and ASP.NET MVC 4. Each Lab provides instructions to guide you through the process of developing a Web application.
+
+In this hands-on lab, you will use Web API to build a simple REST API for a contact manager application. You will also build a client to consume the API.
 
 ### Repository Structure ###
 

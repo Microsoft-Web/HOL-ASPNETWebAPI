@@ -1,4 +1,8 @@
-﻿#Build RESTful API's with ASP.NET Web API#
+﻿<a name="HOLTop" />
+
+# Build RESTful API's with ASP.NET Web API #
+---
+
 <a name="Overview" />
 ## Overview ##
 
@@ -28,14 +32,14 @@ The following is required to complete this hands-on lab:
 
 - [Microsoft Visual Studio Express 2012 for Web](http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-for-web) or superior (read [Appendix B](#AppendixB) for instructions on how to install it).
 
-- [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4) (included in the Microsoft Visual Studio Express 2012 for Web installation)
+<a name="Setup" /> 
+### Setup ###
 
-<a name="CodeSnippets" />
-### Installing Code Snippets ###
+**Installing Code Snippets**
 
-For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Setup\CodeSnippets.vsi** file.
- 
-If you are not familiar with the Visual Studio Code Snippets, and want to learn how to use them, you can refer to the appendix A from this document "[Appendix A: Using Code Snippets](#AppendixA)".
+For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Assets\CodeSnippets.vsi** file.
+
+If you are not familiar with the Visual Studio Code Snippets, and want to learn how to use them, you can refer to the appendix from this document "[Appendix A: Using Code Snippets](#AppendixA)".
 
 <a name="Exercises"/>
 ## Exercises ##
@@ -48,10 +52,9 @@ This hands-on lab includes the following exercise:
 
 1. [Exercise 3: Consume the Web API from an HTML Client ](#Exercise3)
 
- 
-Estimated time to complete this lab: **60 minutes**.
+>**Note:** Each exercise is accompanied by an **End** folder containing the resulting solution you should obtain after completing the exercises. You can use this solution as a guide if you need additional help working through the exercises.
 
->**Note:** When you first start Visual Studio, you must select one of the predefined settings collections. Every predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this lab describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in these procedures that you need to take into account. 
+Estimated time to complete this lab: **60 minutes**.
 
 <a name="Exercise1" />
 ### Exercise 1: Create a Read-Only Web API ###
@@ -362,12 +365,15 @@ In this task, you will prepare to enhance the Web API project created in Exercis
 1. Run **Visual Studio 2012 Express for Web**, to do this go to **Start** and type **VS Express for Web** then press **Enter**.
 
 1. Open the **Begin** solution located at **Source/Ex02-ReadWriteWebAPI/Begin/** folder. Otherwise, you might continue using the **End** solution obtained by completing the previous exercise.
-	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click **Project** and select **Manage NuGet Packages**.
 
-	1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
+	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click the **Project** menu and select **Manage NuGet Packages**.
+
+	1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
 	1. Finally, build the solution by clicking **Build** | **Build Solution**.
 
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
+	
 1. Open the **Services/ContactRepository.cs** file.
 
 <a name="Ex2Task2" />
@@ -483,12 +489,14 @@ In this task, you will modify the default Index view of the web application to s
 1. Open **Visual Studio 2012 Express for Web** if it is not already open.
 
 1. Open the **Begin** solution located at **Source/Ex03-ConsumingWebAPI/Begin/** folder. Otherwise, you might continue using the **End** solution obtained by completing the previous exercise.
-	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click **Project** and select **Manage NuGet Packages**.
+	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click the **Project** menu and select **Manage NuGet Packages**.
 
-	1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
+	1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
 	1. Finally, build the solution by clicking **Build** | **Build Solution**.
 
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
+	
 1. Open the **Index.cshtml** file located at **Views/Home** folder.
 
 1. Replace the HTML code within the div element with id **body** so that it looks like the following code. 
@@ -637,6 +645,10 @@ In this task, you will continue to modify the Index view of the MVC application.
  	![The browser reflects successful creation of the new contact instance](./images/The-browser-reflects-successful-creation-of-the-new-contact-instance.png?raw=true "The browser reflects successful creation of the new contact instance")
  
 	_The browser reflects successful creation of the new contact instance_
+
+>**Note:** Additionally, you can deploy this application to Windows Azure Web Sites following [Appendix C: Publishing an ASP.NET MVC 4 Application using Web Deploy](#AppendixC).
+
+---
 
 <a name="Summary" />
 ## Summary ##

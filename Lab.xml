@@ -2,18 +2,19 @@
 <Lab xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/ContentFramework.Core.Models">
   <Id>ASPNETWebApi</Id>
   <Author>
-    <Blog></Blog>
-    <Email></Email>
     <Name></Name>
   </Author>
-  <Description>In recent years, it has become clear that HTTP is not just for serving up HTML pages. It is also a powerful platform for building Web APIs, using a handful of verbs (GET, POST, and so forth) plus a few simple concepts such as URIs and headers. WCF Web API is a set of Windows Communication Foundation (WCF) components that simplify HTTP programming. Because it is built on WCF, Web API automatically handles the low-level transport details of HTTP, exposing the HTTP programming model in a natural, flexible and extensible way. In this hands-on lab, you will use the WCF Web API to build a simple REST API for a contact manager application. You will also build a client to consume the API. No prior knowledge of WCF is assumed.</Description>
+  <Description>In this hands-on lab, you will use Web API to build a simple REST API for a contact manager application. You will also build a client to consume the API.</Description>
   <Document ConversionType="Html">.\HOL.md</Document>
   <Title>Build RESTful APIs with ASP.NET Web API</Title>
-  <Version>1.2.0</Version>
+  <Version>1.3.0</Version>
   <Source>.\Source</Source>
-  <DependencyChecker ScriptsFolder="env:PackagePath\Assets\DependencyChecker\scripts">.\Source\Setup\Dependencies.dep</DependencyChecker>
   <Technologies>
     <Technology>Visual Studio</Technology>
     <Technology>.NET Framework</Technology>
+	<Technology>ASP.NET MVC</Technology>
   </Technologies>
+  <CustomProperties>
+    <Property Name="GitHubRepository" Value="https://github.com/Microsoft-Web/HOL-ASPNETWebAPI" />
+  </CustomProperties>
 </Lab>
