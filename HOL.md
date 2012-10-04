@@ -167,11 +167,12 @@ In this task, you will create the controller classes in which API methods will r
 
 	(Code Snippet - _Web API Lab - Ex01 - Contact Class_)
 	
-	<!-- mark: 3-4 -->
+	<!-- mark: 3-5 -->
 	````C#
 	public class Contact
 	{
 	    public int Id { get; set; }
+
 	    public string Name { get; set; }
 	}
 	````
@@ -258,18 +259,18 @@ This task will demonstrate how to extract functionality into a Service layer to 
 	    public Contact[] GetAllContacts()
 	    {
 	        return new Contact[]
-	            {
-	                new Contact
-	                {
-	                    Id = 1,
-	                    Name = "Glenn Block"
-	                },
-	                new Contact
-	                {
-	                    Id = 2,
-	                    Name = "Dan Roth"
-	                }
-	            };
+			{
+				 new Contact
+				 {
+					  Id = 1,
+					  Name = "Glenn Block"
+				 },
+				 new Contact
+				 {
+					  Id = 2,
+					  Name = "Dan Roth"
+				 }
+			};
 	    }
 	}
 	````
@@ -292,11 +293,11 @@ This task will demonstrate how to extract functionality into a Service layer to 
 	````C#
 	public class ContactController : ApiController
 	{
-	    private ContactRepository _contactRepository;
+	    private ContactRepository contactRepository;
 
         public ContactController()
         {
-            this._contactRepository = new ContactRepository();
+            this.contactRepository = new ContactRepository();
         } 
 		...
 	}
@@ -310,7 +311,7 @@ This task will demonstrate how to extract functionality into a Service layer to 
 	````C#
 	public Contact[] Get()
 	{
-	    return _contactRepository.GetAllContacts();
+	    return contactRepository.GetAllContacts();
 	}
 	````
 
@@ -385,7 +386,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 
 	<!-- mark: 1 -->
 	````C#
-	const string cacheKey = "ContactStore";
+	private const string CacheKey = "ContactStore";
 	````
 
 1. Add a constructor to the **ContactRepository** containing the following code.
@@ -399,7 +400,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	 
 	    if (ctx != null)
 	    {
-	        if (ctx.Cache[cacheKey] == null)
+	        if (ctx.Cache[CacheKey] == null)
 	        {
 	            var contacts = new Contact[]
 	            {
@@ -413,7 +414,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	                }
 	            };
 	 
-	            ctx.Cache[cacheKey] = contacts;
+	            ctx.Cache[CacheKey] = contacts;
 	        }
 	    }
 	}
@@ -430,7 +431,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 	 
 	    if (ctx != null)
 	    {
-	        return (Contact[])ctx.Cache[cacheKey];
+	        return (Contact[])ctx.Cache[CacheKey];
 	    }
 	 
 	    return new Contact[]
@@ -459,9 +460,9 @@ In this task, you will augment the ContactRepository class of the Web API projec
 			{
 				 try
 				 {
-					  var currentData = ((Contact[])ctx.Cache[cacheKey]).ToList();
+					  var currentData = ((Contact[])ctx.Cache[CacheKey]).ToList();
 					  currentData.Add(contact);
-					  ctx.Cache[cacheKey] = currentData.ToArray();
+					  ctx.Cache[CacheKey] = currentData.ToArray();
 
 					  return true;
 				 }
@@ -568,7 +569,7 @@ In this task, you will continue to modify the Index view of the MVC application.
 	````C#
 	public HttpResponseMessage Post(Contact contact)
 	{
-		 this._contactRepository.SaveContact(contact);
+		 this.contactRepository.SaveContact(contact);
 
          var response = Request.CreateResponse<Contact>(System.Net.HttpStatusCode.Created, contact);
             

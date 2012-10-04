@@ -11,16 +11,16 @@ namespace ContactManager.Controllers
 {
     public class ContactController : ApiController
     {
-        private ContactRepository _contactRepository;
+        private ContactRepository contactRepository;
 
         public ContactController()
         {
-            this._contactRepository = new ContactRepository();
+            this.contactRepository = new ContactRepository();
         } 
 
         public Contact[] Get()
         {
-            return _contactRepository.GetAllContacts();
+            return this.contactRepository.GetAllContacts();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ContactManager.Services
 {
     public class ContactRepository
     {
-        const string cacheKey = "ContactStore";
+        private const string CacheKey = "ContactStore";
 
         public ContactRepository()
         {
@@ -16,21 +16,21 @@ namespace ContactManager.Services
 
             if (ctx != null)
             {
-                if (ctx.Cache[cacheKey] == null)
+                if (ctx.Cache[CacheKey] == null)
                 {
                     var contacts = new Contact[]
-	            {
-	                new Contact
-	                {
-	                    Id = 1, Name = "Glenn Block"
-	                },
-	                new Contact
-	                {
-	                    Id = 2, Name = "Dan Roth"
-	                }
-	            };
+                    {
+                        new Contact
+                        {
+                            Id = 1, Name = "Glenn Block"
+                        },
+                        new Contact
+                        {
+                            Id = 2, Name = "Dan Roth"
+                        }
+                    };
 
-                    ctx.Cache[cacheKey] = contacts;
+                    ctx.Cache[CacheKey] = contacts;
                 }
             }
         }
@@ -41,17 +41,17 @@ namespace ContactManager.Services
 
             if (ctx != null)
             {
-                return (Contact[])ctx.Cache[cacheKey];
+                return (Contact[])ctx.Cache[CacheKey];
             }
 
             return new Contact[]
-	        {
-	            new Contact
-	            {
-	                Id = 0,
-	                Name = "Placeholder"
-	            }
-	        };
+            {
+                new Contact
+                {
+                    Id = 0,
+                    Name = "Placeholder"
+                }
+            };
         }
 
         public bool SaveContact(Contact contact)
@@ -62,9 +62,9 @@ namespace ContactManager.Services
             {
                 try
                 {
-                    var currentData = ((Contact[])ctx.Cache[cacheKey]).ToList();
+                    var currentData = ((Contact[])ctx.Cache[CacheKey]).ToList();
                     currentData.Add(contact);
-                    ctx.Cache[cacheKey] = currentData.ToArray();
+                    ctx.Cache[CacheKey] = currentData.ToArray();
 
                     return true;
                 }
