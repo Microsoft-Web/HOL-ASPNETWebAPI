@@ -70,9 +70,9 @@ In this task, you will use the new ASP.NET web project templates to create a Web
 
 1. From the **File** menu, select **New Project**. Select the **Visual C# | Web** project type from the project type tree view, then select the **ASP.NET MVC 4 Web Application** project type. Set the project's **Name** to _ContactManager_ and the **Solution name** to _Begin_, then click **OK**.
 
- 	![Creating a new MVC 4.0 Web Application Project](./images/Creating-a-new-MVC-4.0-Web-Application-Project.png?raw=true "Creating a new MVC 4.0 Web Application Project")
+ 	![Creating a new ASP.NET MVC 4.0 Web Application Project](./images/Creating-a-new-MVC-4.0-Web-Application-Project.png?raw=true "Creating a new ASP.NET MVC 4.0 Web Application Project")
  
-	_Creating a new MVC 4.0 Web Application Project_
+	_Creating a new ASP.NET MVC 4.0 Web Application Project_
 
 1. In the ASP.NET MVC 4 project type dialog, select the **Web API** project type. Click **OK**.
 
