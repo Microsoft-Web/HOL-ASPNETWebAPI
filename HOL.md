@@ -289,7 +289,7 @@ This task will demonstrate how to extract functionality into a Service layer to 
 
 	(Code Snippet - _Web API Lab - Ex01 - Contact Controller_)
 
-	<!-- mark: 2-7 -->
+	<!-- mark: 3-8 -->
 	````C#
 	public class ContactController : ApiController
 	{
@@ -423,7 +423,7 @@ In this task, you will augment the ContactRepository class of the Web API projec
 1. Modify the code for the **GetAllContacts** method as demonstrated below.
 
 	(Code Snippet - _Web API Lab - Ex02 - Get All Contacts_)
-	<!-- mark: 2-17 -->
+	<!-- mark: 3-17 -->
 	````C#
 	public Contact[] GetAllContacts()
 	{
@@ -450,7 +450,8 @@ In this task, you will augment the ContactRepository class of the Web API projec
 1. Implement a new method named **SaveContact** to the **ContactRepository** class to do the work of saving a contact. The **SaveContact** method should take a single **Contact** parameter and return a Boolean value indicating success or failure.
 
 	(Code Snippet - _Web API Lab - Ex02 - Implementing the SaveContact Method_)
-	<!-- mark: 1-25-->
+
+	<!-- mark:1-23 -->
 	````C#
 	public bool SaveContact(Contact contact)
 	  {
